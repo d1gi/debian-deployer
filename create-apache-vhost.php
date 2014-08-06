@@ -33,5 +33,5 @@ $conf = "
 
 file_put_contents('/etc/apache2/sites-enabled/' . $domain, $conf);
 
-mkdir("/var/www/{$domain}.deb");
-mkdir("/var/www/{$domain}.deb/web");
+mkdir("/var/www/{$domain}");
+mkdir("/var/www/{$domain}/web");
