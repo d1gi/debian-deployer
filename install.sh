@@ -59,6 +59,11 @@ apt-get install nginx -y
 # Composer
 curl -skS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer.phar
-cp new/usr/local/bin/composer /usr/local/bin/composer
 
 apt-get clean
+
+# Apache
+rm /etc/apache2/sites-enabled/000-default
+
+cp -R new/etc / -v
+cp -R new/usr / -v
