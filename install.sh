@@ -56,4 +56,9 @@ service apache2 restart
 
 apt-get install nginx -y
 
+# Composer
+cd /usr/local/bin
+curl -skS https://getcomposer.org/installer | php
+cd
+
 apt-get clean
