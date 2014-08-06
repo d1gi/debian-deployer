@@ -68,7 +68,12 @@ rm /etc/apache2/sites-enabled/000-default
 
 cp -R new/etc / -v
 cp -R new/usr / -v
-cp ~/.bashrc ~/.bashrc_old
+
+if [ -f ~/.bashrc_old ]
+then
+    cp ~/.bashrc ~/.bashrc_old
+    cp new/.bashrc ~/.bashrc
+fi
 
 # @todo pma и pga
 #wget http://heanet.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.2.7/phpMyAdmin-4.2.7-all-languages.zip
