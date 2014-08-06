@@ -43,9 +43,10 @@ apt-get install php5-snmp php5-xmlrpc php5-xsl php5-mysqlnd php5-pgsql php5-tidy
 # Хак с расширением php5-memcached
 printf "deb http://packages.dotdeb.org wheezy all\ndeb-src http://packages.dotdeb.org wheezy all" > /etc/apt/sources.list.d/dotdeb.list
 apt-get update
-apt-get install php5-memcached -y
+apt-get install libmemcached11
 printf "deb http://packages.dotdeb.org wheezy-php55 all\ndeb-src http://packages.dotdeb.org wheezy-php55 all" > /etc/apt/sources.list.d/dotdeb.list
 apt-get update
+apt-get install php5-memcached -y
 
 a2enmod rewrite
 a2enmod php5
