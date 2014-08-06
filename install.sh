@@ -1,5 +1,7 @@
 #!/bin/bash
 
+apt-get install apt-transport-https -y
+
 # varnish
 wget --quiet -O - https://repo.varnish-cache.org/debian/GPG-key.txt | apt-key add -
 echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-4.0" > /etc/apt/sources.list.d/varnish-cache.list
@@ -25,7 +27,7 @@ apt-get update
 
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit -y
-apt-get install apt-transport-https locales-all fail2ban python-software-properties -y
+apt-get install locales-all fail2ban python-software-properties -y
 
 apt-get install locales
 dpkg-reconfigure locales
