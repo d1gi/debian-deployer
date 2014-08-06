@@ -75,3 +75,6 @@ git config --global color.diff always
 git config --global color.status always
 git config --global color.branch always
 git config --global color.interactive always
+
+wget http://get.sensiolabs.org/php-cs-fixer.phar -O /usr/local/bin/php-cs-fixer.phar
+chmod 0777 /usr/local/bin/php-cs-fixer.phar
