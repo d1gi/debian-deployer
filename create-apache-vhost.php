@@ -39,7 +39,7 @@ file_put_contents('/etc/apache2/sites-enabled/' . $domain, $conf);
 
 mkdir("/var/www/{$domain}");
 mkdir("/var/www/{$domain}/web");
-file_put_contents("/var/www/{$domain}/web/index.php", 'under construction...');
+file_put_contents("/var/www/{$domain}/web/index.php", $domain . ' is under construction...');
 system("chown -hR www-data:www-data /var/www/{$domain}/web");
 
 system('service apache2 reload');
