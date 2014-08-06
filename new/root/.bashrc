@@ -19,6 +19,6 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-if [ -e ~/symfony2-autocomplete/symfony2-autocomplete.bash ]; then
-    . ~/symfony2-autocomplete/symfony2-autocomplete.bash
+if [ -e /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash ]; then
+    . /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash
 fi
