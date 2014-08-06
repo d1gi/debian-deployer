@@ -2,7 +2,7 @@
 <?php
 
 if (!isset($argv[1])) {
-    echo "You need to set domain name, for example; ";
+    echo "You need to set domain name, for example: ";
     echo "  create-apache-vhost.php mysite.ru\n";
     exit(1);
 }
