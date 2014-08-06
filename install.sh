@@ -34,7 +34,7 @@ dpkg-reconfigure locales
 dpkg-reconfigure tzdata
 
 # SQL Сервера
-apt-get install mariadb-server
+apt-get install mariadb-server -y
 #apt-get install mysql-server mysql-client -y
 
 # Apache и PHP
