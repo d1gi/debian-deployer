@@ -18,13 +18,16 @@ echo "deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main" > /etc/apt/
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
 printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main" > /etc/apt/sources.list.d/mariadb.list
 
+# MongoDB
+apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+echo "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen" > /etc/apt/sources.list.d/mongodb.list
+
 # Nginx native
 #wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
 #printf "deb http://nginx.org/packages/debian/ wheezy nginx\ndeb-src http://nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sources.list.d/nginx.list
 
 # NodeJS
 wget -qO- https://deb.nodesource.com/setup_nodesource_repo | bash -
-#apt-get update
 
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit -y
@@ -36,6 +39,8 @@ dpkg-reconfigure tzdata
 # БД
 apt-get install redis-server -y
 apt-get install mariadb-server -y
+#apt-get install mongodb-org -y
+#apt-get install postgresql -y
 #apt-get install mysql-server mysql-client -y
 
 # Apache и PHP
@@ -59,8 +64,8 @@ cp -R new/usr / -v
 
 if [ ! -f ~/.bashrc_old ]
 then
-    cp -v ~/.bashrc ~/.bashrc_old
-    cp -R new/root ~
+    mv ~/.bashrc ~/.bashrc_old
+    cp -R new/root /
 fi
 
 wget http://get.sensiolabs.org/php-cs-fixer.phar -O /usr/local/bin/php-cs-fixer.phar
