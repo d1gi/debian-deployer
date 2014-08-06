@@ -34,7 +34,7 @@ dpkg-reconfigure locales
 dpkg-reconfigure tzdata
 
 # SQL Сервера
-apt-get install mariadb-server
+apt-get install mariadb-server -y
 #apt-get install mysql-server mysql-client -y
 
 # Apache и PHP
@@ -55,5 +55,10 @@ a2enmod php5
 service apache2 restart
 
 apt-get install nginx -y
+
+# Composer
+cd /usr/local/bin
+curl -skS https://getcomposer.org/installer | php
+cd
 
 apt-get clean
