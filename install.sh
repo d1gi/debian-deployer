@@ -65,8 +65,10 @@ apt-get clean
 # Apache
 rm /etc/apache2/sites-enabled/000-default
 
+
 cp -R new/etc / -v
 cp -R new/usr / -v
+cp ~/.bashrc ~/.bashrc_old
 
 # @todo pma и pga
 #wget http://heanet.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.2.7/phpMyAdmin-4.2.7-all-languages.zip
@@ -78,3 +80,5 @@ git config --global color.interactive always
 
 wget http://get.sensiolabs.org/php-cs-fixer.phar -O /usr/local/bin/php-cs-fixer.phar
 chmod 0777 /usr/local/bin/php-cs-fixer.phar
+
+git clone https://github.com/KnpLabs/symfony2-autocomplete.git ~/symfony2-autocomplete
