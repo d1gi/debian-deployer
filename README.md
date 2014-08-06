@@ -10,6 +10,13 @@ git clone https://github.com/d1gi/debian-deployer.git
 ./debian-deployer/install.sh
 ```
 
+Create virtual hosts
+--------------------
+
+```
+./create-apache-vhost.php mysite.ru
+```
+
 @todo
 -----
 
