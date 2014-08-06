@@ -7,7 +7,8 @@ Installation
 ```
 apt-get install git
 git clone https://github.com/d1gi/debian-deployer.git
-./debian-deployer/install.sh
+cd debian-deployer
+./install.sh
 ```
 
 Create virtual hosts
