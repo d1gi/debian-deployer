@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Базовый софт
-apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit -y
-apt-get install apt-transport-https locales-all fail2ban python-software-properties -y
-
 # varnish
 wget --quiet -O - https://repo.varnish-cache.org/debian/GPG-key.txt | apt-key add -
 echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-4.0" > /etc/apt/sources.list.d/varnish-cache.list
@@ -26,6 +22,10 @@ wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
 printf "deb http://nginx.org/packages/debian/ wheezy nginx\ndeb-src http://nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sources.list.d/nginx.list
 
 apt-get update
+
+# Базовый софт
+apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit -y
+apt-get install apt-transport-https locales-all fail2ban python-software-properties -y
 
 apt-get install locales
 dpkg-reconfigure locales
