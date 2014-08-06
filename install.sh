@@ -77,8 +77,8 @@ chmod 0777 /usr/local/bin/php-cs-fixer.phar
 git clone https://github.com/KnpLabs/symfony2-autocomplete.git /usr/share/symfony2-autocomplete
 
 # @todo pma и pga
-#wget http://heanet.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.2.7/phpMyAdmin-4.2.7-all-languages.zip
-#wget http://cznic.dl.sourceforge.net/project/phppgadmin/phpPgAdmin%20%5Bstable%5D/phpPgAdmin-5.1/phpPgAdmin-5.1.zip
+# wget http://heanet.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.2.7/phpMyAdmin-4.2.7-all-languages.zip
+# wget http://cznic.dl.sourceforge.net/project/phppgadmin/phpPgAdmin%20%5Bstable%5D/phpPgAdmin-5.1/phpPgAdmin-5.1.zip
 
 # Git
 git config --global color.diff always
