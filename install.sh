@@ -18,7 +18,7 @@ echo "deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main" > /etc/apt/
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
 printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main" > /etc/apt/sources.list.d/mariadb.list
 
-# Nginx
+# Nginx native
 #wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
 #printf "deb http://nginx.org/packages/debian/ wheezy nginx\ndeb-src http://nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sources.list.d/nginx.list
 
@@ -47,7 +47,7 @@ rm /etc/apache2/sites-enabled/000-default
 a2enmod rewrite
 a2enmod php5
 
-apt-get install nginx -y
+apt-get install nodejs nginx -y
 
 # Composer
 curl -skS https://getcomposer.org/installer | php
@@ -57,16 +57,16 @@ mv composer.phar /usr/local/bin/composer.phar
 cp -R new/etc / -v
 cp -R new/usr / -v
 
-if [ -f ~/.bashrc_old ]
+if [ ! -f ~/.bashrc_old ]
 then
     cp -v ~/.bashrc ~/.bashrc_old
-    cp -v new/.bashrc ~/.bashrc
+    cp -R new/root ~
 fi
 
 wget http://get.sensiolabs.org/php-cs-fixer.phar -O /usr/local/bin/php-cs-fixer.phar
 chmod 0777 /usr/local/bin/php-cs-fixer.phar
 
-git clone https://github.com/KnpLabs/symfony2-autocomplete.git ~/symfony2-autocomplete
+git clone https://github.com/KnpLabs/symfony2-autocomplete.git /usr/share/symfony2-autocomplete
 
 # @todo pma и pga
 #wget http://heanet.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.2.7/phpMyAdmin-4.2.7-all-languages.zip
