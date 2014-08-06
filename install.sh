@@ -68,6 +68,9 @@ then
     cp -R new/root /
 fi
 
+mkdir /var/log/php
+chmod 0777 /var/log/php
+
 wget http://get.sensiolabs.org/php-cs-fixer.phar -O /usr/local/bin/php-cs-fixer.phar
 chmod 0777 /usr/local/bin/php-cs-fixer.phar
 
