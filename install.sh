@@ -1,21 +1,30 @@
 #!/bin/bash
 
 # Базовый софт
-apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit apt-transport-https -y
+apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit -y
+apt-get install apt-transport-https locales-all fail2ban python-software-properties -y
 
-# Подготовка репозиториев
+# varnish
 curl https://repo.varnish-cache.org/debian/GPG-key.txt | apt-key add -
-curl http://www.dotdeb.org/dotdeb.gpg | apt-key add -
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc |apt-key add -
-
 echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-4.0" >> /etc/apt/sources.list.d/varnish-cache.list
-echo "deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main" >> /etc/apt/sources.list.d/postgresql.list
+
+# dotdeb
+curl http://www.dotdeb.org/dotdeb.gpg | apt-key add -
 printf "deb http://packages.dotdeb.org wheezy-php55 all\ndeb-src http://packages.dotdeb.org wheezy-php55 all" >> /etc/apt/sources.list.d/dotdeb.list
+
+# postgresql
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc |apt-key add -
+echo "deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main" >> /etc/apt/sources.list.d/postgresql.list
+
+# Maria DB
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
+printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main" >> /etc/apt/sources.list.d/mariadb.list
 
 apt-get update
 
 apt-get install locales
 dpkg-reconfigure locales
+dpkg-reconfigure tzdata
 
 # Сервера
 #apt-get install mysql-server mysql-client -y
