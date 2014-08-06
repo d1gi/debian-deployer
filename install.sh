@@ -67,3 +67,11 @@ rm /etc/apache2/sites-enabled/000-default
 
 cp -R new/etc / -v
 cp -R new/usr / -v
+
+# @todo pma и pga
+#wget http://heanet.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.2.7/phpMyAdmin-4.2.7-all-languages.zip
+
+git config --global color.diff always
+git config --global color.status always
+git config --global color.branch always
+git config --global color.interactive always

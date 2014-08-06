@@ -9,6 +9,11 @@ if (!isset($argv[1])) {
 
 $domain = $argv[1];
 
+if (file_exists('/var/www/' . $domain)) {
+    echo "Domain $domain is exists.\n";
+    exit(1);
+}
+
 $conf = "
 <VirtualHost *:88>
     ServerAdmin webmaster@{$domain}
@@ -35,3 +40,5 @@ file_put_contents('/etc/apache2/sites-enabled/' . $domain, $conf);
 
 mkdir("/var/www/{$domain}");
 mkdir("/var/www/{$domain}/web");
+
+system('service apache2 reload');
