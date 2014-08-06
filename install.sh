@@ -78,12 +78,15 @@ git clone https://github.com/KnpLabs/symfony2-autocomplete.git /usr/share/symfon
 
 # @todo pma и pga
 #wget http://heanet.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.2.7/phpMyAdmin-4.2.7-all-languages.zip
+#wget http://cznic.dl.sourceforge.net/project/phppgadmin/phpPgAdmin%20%5Bstable%5D/phpPgAdmin-5.1/phpPgAdmin-5.1.zip
 
 # Git
 git config --global color.diff always
 git config --global color.status always
 git config --global color.branch always
 git config --global color.interactive always
+
+apt-get install postfix resolvconf -y
 
 apt-get clean
 service apache2 restart
