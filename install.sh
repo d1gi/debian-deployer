@@ -34,7 +34,8 @@ dpkg-reconfigure locales
 dpkg-reconfigure tzdata
 
 # БД
-apt-get install mariadb-server redis-server -y
+apt-get install redis-server -y
+apt-get install mariadb-server -y
 #apt-get install mysql-server mysql-client -y
 
 # Apache и PHP
