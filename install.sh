@@ -4,7 +4,7 @@ apt-get install apt-transport-https -y
 
 # Varnish
 wget --quiet -O - https://repo.varnish-cache.org/debian/GPG-key.txt | apt-key add -
-echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-4.0" > /etc/apt/sources.list.d/varnish-cache.list
+echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-3.0" > /etc/apt/sources.list.d/varnish-cache.list
 
 # dotdeb
 wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
@@ -38,8 +38,9 @@ echo "deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main
 wget -qO- https://deb.nodesource.com/setup_nodesource_repo | bash -
 
 # Базовый софт
-apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit -y
-apt-get install locales locales-all fail2ban python-software-properties -y
+apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit python-software-properties -y
+apt-get install locales locales-all fail2ban -y
+apt-get install libedit-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install oracle-java7-installer -y
 #apt-get install elasticsearch -y
 
