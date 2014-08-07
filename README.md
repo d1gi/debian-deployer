@@ -45,10 +45,11 @@ Create virtual hosts
 --------------------
 
 ```
-./create-apache-vhost.php mysite.ru
+create-apache-vhost.php mysite.ru
 ```
 
 @todo
 -----
 
  *  Install via tar archive
+ *  Install latest phpmyadmin via http://www.phpmyadmin.net/home_page/version.json
