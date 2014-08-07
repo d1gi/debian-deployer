@@ -22,6 +22,14 @@ printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main\ndeb-src
 apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
 echo "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen" > /etc/apt/sources.list.d/mongodb.list
 
+# Java
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+printf "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main\ndeb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" > /etc/apt/sources.list.d/java.list
+
+# elasticsearch
+wget -qO - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
+echo "deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
+
 # Nginx native
 #wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
 #printf "deb http://nginx.org/packages/debian/ wheezy nginx\ndeb-src http://nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sources.list.d/nginx.list
@@ -32,6 +40,8 @@ wget -qO- https://deb.nodesource.com/setup_nodesource_repo | bash -
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit -y
 apt-get install locales locales-all fail2ban python-software-properties -y
+apt-get install oracle-java7-installer -y
+#apt-get install elasticsearch -y
 
 dpkg-reconfigure locales
 dpkg-reconfigure tzdata
