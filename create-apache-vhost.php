@@ -35,11 +35,21 @@ $conf = "
 </VirtualHost>
 ";
 
+$htaccess = "
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteRule ^.*$ index.php [L]
+</IfModule>
+";
+
 file_put_contents('/etc/apache2/sites-enabled/' . $domain, $conf);
 
 mkdir("/var/www/{$domain}");
 mkdir("/var/www/{$domain}/web");
 file_put_contents("/var/www/{$domain}/web/index.php", $domain . ' is under construction...');
+file_put_contents("/var/www/{$domain}/web/.htaccess", $htaccess);
 system("chown -hR www-data:www-data /var/www/{$domain}/web");
 
 system('service apache2 reload');
