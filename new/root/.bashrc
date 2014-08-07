@@ -5,20 +5,27 @@
 # PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
 # umask 022
 
+PS1="\[\033[1;33m\]\u\[\033[1;0m\]\[\033[1;34m\]@\[\033[0m\]\[\033[1;31m\]\h \[\033[1;32m\]\w\\[\033[1;0m\]$ "
+
 parse_git_branch() {
- git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
 # non-printable characters must be enclosed inside \[ and \]
-PS1='\[\033]0;\u@\h: \w\007\[\033[1;33m\]' # set window title
-PS1="$PS1"'\u\[\033[1;0m\]\[\033[1;34m\]@\[\033[0m\]\[\033[1;31m\]\h ' # user@host<space>
-PS1="$PS1"'\[\033[1;32m\]'        # change color
-PS1="$PS1"'\w'                    # current working directory
-PS1="$PS1"'\[\033[0m\]'           # change color
-PS1="$PS1"'$(parse_git_branch)$ ' # prompt with git brand: always $
-PS1="$PS1"'$ ' # prompt: always $
+COLORED_PS1='\[\033]0;\u@\h: \w\007\[\033[1;33m\]' # set window title
+COLORED_PS1="$COLORED_PS1"'\u\[\033[1;0m\]\[\033[1;34m\]@\[\033[0m\]\[\033[1;31m\]\h ' # user@host<space>
+COLORED_PS1="$COLORED_PS1"'\[\033[1;32m\]'        # change color
+COLORED_PS1="$COLORED_PS1"'\w'                    # current working directory
+COLORED_PS1="$COLORED_PS1"'\[\033[0m\]'           # change color
+#COLORED_PS1="$COLORED_PS1"'$(parse_git_branch)$ ' # prompt with current git branch: always $
+COLORED_PS1="$COLORED_PS1"'$ ' # prompt: always $
 
-#PS1="\[\033]0;\w\007\[\033[1;33m\]\u\[\033[1;0m\]\[\033[1;34m\]@\[\033[0m\]\[\033[1;31m\]\h \[\033[1;32m\]\w\\[\033[1;0m\]$ ";
+case "${TERM}" in
+    xterm*)
+       PS1="$COLORED_PS1";;
+    screen)
+       PS1="$COLORED_PS1";;
+esac
 
 # You may uncomment the following lines if you want `ls' to be colorized:
 export LS_OPTIONS='--color=auto'
