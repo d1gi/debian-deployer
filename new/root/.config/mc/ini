@@ -81,7 +81,7 @@ skin=default
 filepos_max_saved_entries=1024
 
 [Layout]
-message_visible=1
+message_visible=0
 keybar_visible=1
 xterm_title=1
 output_lines=0
@@ -111,6 +111,8 @@ linux=
 color_terminals=
 
 xterm=
+
+screen=
 
 [Panels]
 show_mini_info=true
