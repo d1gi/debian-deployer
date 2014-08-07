@@ -55,7 +55,7 @@ apt-get install mariadb-server -y
 #apt-get install mysql-server mysql-client -y
 
 # Apache и PHP
-apt-get install apache2 apache2-mpm-prefork libapache2-mod-php5 libapache2-mod-rpaf memcached php5 php5-dev php5-cli -y
+apt-get install apache2 apache2-mpm-prefork libapache2-mod-php5 libapache2-mod-rpaf memcached php5 php5-dev php5-cli php5-fpm -y
 apt-get install php5-apcu php-pear php5-gd php5-intl php5-curl php5-geoip php5-gmp php5-imagick php5-mcrypt php5-sqlite -y
 apt-get install php5-snmp php5-xmlrpc php5-xsl php5-mysqlnd php5-pgsql php5-tidy php5-redis php5-memcache php5-memcached -y
 
@@ -70,12 +70,12 @@ curl -skS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer.phar
 
 # Configs
-cp -R new/etc / -v
-cp -R new/usr / -v
-
 if [ ! -f ~/.bashrc_old ]
 then
     mv ~/.bashrc ~/.bashrc_old
+    cp -R new/etc / -v
+    cp -R new/usr / -v
+    cp -v create-apache-vhost.php /usr/local/bin/create-apache-vhost.php
     cp -R new/root /
 fi
 
