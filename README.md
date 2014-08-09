@@ -6,7 +6,7 @@ Installation
 
 ```
 apt-get update && apt-get upgrade
-apt-get install git screen -y
+apt-get install git screen lsb-release -y
 git clone https://github.com/d1gi/debian-deployer.git
 cd debian-deployer
 ./install.sh
@@ -15,14 +15,14 @@ cd debian-deployer
 or in one line command
 
 ```
-apt-get update && apt-get upgrade -y && apt-get install git screen -y && git clone https://github.com/d1gi/debian-deployer.git && cd debian-deployer && ./install.sh
+apt-get update && apt-get upgrade -y && apt-get install git screen lsb-release -y && git clone https://github.com/d1gi/debian-deployer.git && cd debian-deployer && ./install.sh
 ```
 
 Alternative via zip
 
 ```
 apt-get update && apt-get upgrade
-apt-get install zip screen -y
+apt-get install zip screen lsb-release -y
 wget https://github.com/d1gi/debian-deployer/archive/master.zip -O debian-deployer.zip
 unzip debian-deployer.zip
 cd debian-deployer-master
