@@ -37,8 +37,6 @@ echo "deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main
 # NodeJS
 wget -qO- https://deb.nodesource.com/setup_nodesource_repo | bash -
 
-apt-get upgrade -y
-
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit python-software-properties -y
 apt-get install locales locales-all fail2ban resolvconf -y
