@@ -5,6 +5,10 @@ Installation
 ------------
 
 ```
+apt-get update && apt-get upgrade -y
+```
+
+```
 apt-get install git screen -y
 git clone https://github.com/d1gi/debian-deployer.git
 cd debian-deployer
