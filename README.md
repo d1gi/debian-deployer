@@ -53,3 +53,5 @@ create-apache-vhost.php mysite.ru
 
  *  Install via tar archive
  *  Install latest phpmyadmin via http://www.phpmyadmin.net/home_page/version.json
+ *  igbinary
+ *  IonCube Loader (https://www.digitalocean.com/community/tutorials/how-to-install-ioncube-loader)
