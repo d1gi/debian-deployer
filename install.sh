@@ -30,6 +30,13 @@ printf "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main\ndeb-s
 wget -qO - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
 echo "deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
 
+# Apache Cassandra
+gpg --keyserver pgp.mit.edu --recv-keys F758CE318D77295D
+gpg --export --armor F758CE318D77295D | apt-key add -
+gpg --keyserver pgp.mit.edu --recv-keys 2B5C1B00
+gpg --export --armor 2B5C1B00 | apt-key add -
+printf "deb http://www.apache.org/dist/cassandra/debian 20x main\ndeb-src http://www.apache.org/dist/cassandra/debian 20x main" > /etc/apt/sources.list.d/cassandra.list
+
 # Nginx native
 #wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
 #printf "deb http://nginx.org/packages/debian/ wheezy nginx\ndeb-src http://nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sources.list.d/nginx.list
@@ -39,7 +46,7 @@ wget -qO- https://deb.nodesource.com/setup_nodesource_repo | bash -
 
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit python-software-properties -y
-apt-get install locales locales-all fail2ban resolvconf -y
+apt-get install locales locales-all fail2ban resolvconf ntp -y
 apt-get install libedit-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install oracle-java7-installer -y
 #apt-get install elasticsearch -y
@@ -50,8 +57,9 @@ dpkg-reconfigure tzdata
 # БД
 apt-get install redis-server -y
 apt-get install mariadb-server -y
-#apt-get install mongodb-org -y
 #apt-get install postgresql -y
+#apt-get install cassandra -y
+#apt-get install mongodb-org -y
 #apt-get install mysql-server mysql-client -y
 
 # Apache и PHP
