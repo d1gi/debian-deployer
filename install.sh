@@ -79,6 +79,8 @@ mv composer.phar /usr/local/bin/composer.phar
 
 # igbinary
 pecl install igbinary
+ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/apache2/conf.d/20-igbinary.ini
+ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/fpm/conf.d/20-igbinary.ini
 
 # Configs
 if [ ! -f ~/.bashrc_old ]
@@ -89,9 +91,6 @@ then
     cp -v create-apache-vhost.php /usr/local/bin/create-apache-vhost.php
     cp -R new/root /
 fi
-
-ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/apache2/conf.d/20-igbinary.ini
-ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/fpm/conf.d/20-igbinary.ini
 
 mkdir /var/log/php
 chmod 0777 /var/log/php
