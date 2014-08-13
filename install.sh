@@ -80,6 +80,7 @@ mv composer.phar /usr/local/bin/composer.phar
 # igbinary
 pecl install igbinary
 ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/apache2/conf.d/20-igbinary.ini
+ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/cli/conf.d/20-igbinary.ini
 ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/fpm/conf.d/20-igbinary.ini
 
 # Configs
