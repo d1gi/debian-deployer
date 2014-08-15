@@ -43,13 +43,13 @@ igbinary
 nginx
 nodejs
 postfix
+varnish
 ```
 
 **Deactivated packages:**
 ```
 cassandra
 postgresql
-varnish
 mongodb-org
 ```
 
