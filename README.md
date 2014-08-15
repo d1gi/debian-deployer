@@ -32,6 +32,7 @@ cd debian-deployer-master
 Default installed soft
 ----------------------
 
+```
 apache2
 php5.5
 php5.5-fpm
@@ -42,12 +43,15 @@ igbinary
 nginx
 nodejs
 postfix
+```
 
 **Deactivated packages:**
+```
 cassandra
 postgresql
 varnish
 mongodb-org
+```
 
 Use screen
 ----------
