@@ -29,6 +29,26 @@ cd debian-deployer-master
 ./install.sh
 ```
 
+Default installed soft
+----------------------
+
+apache2
+php5.5
+php5.5-fpm
+oracle-java7
+redis-server
+mariadb-server
+igbinary
+nginx
+nodejs
+postfix
+
+**Deactivated packages:**
+cassandra
+postgresql
+varnish
+mongodb-org
+
 Use screen
 ----------
 

@@ -62,7 +62,7 @@ apt-get install mariadb-server -y
 #apt-get install mongodb-org -y
 #apt-get install mysql-server mysql-client -y
 
-# Apache и PHP
+# Web server
 apt-get install apache2 apache2-mpm-prefork libapache2-mod-php5 libapache2-mod-rpaf memcached php5 php5-dev php5-cli php5-fpm -y
 apt-get install php5-apcu php-pear php5-gd php5-intl php5-curl php5-geoip php5-gmp php5-imagick php5-mcrypt php5-sqlite -y
 apt-get install php5-snmp php5-xmlrpc php5-xsl php5-mysqlnd php5-pgsql php5-tidy php5-redis php5-memcache php5-memcached -y
@@ -72,6 +72,9 @@ a2enmod rewrite
 a2enmod php5
 
 apt-get install nodejs nginx -y
+
+# Cache
+apt-get install varnish -y
 
 # Composer
 curl -skS https://getcomposer.org/installer | php
