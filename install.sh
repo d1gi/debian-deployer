@@ -37,6 +37,10 @@ gpg --keyserver pgp.mit.edu --recv-keys 2B5C1B00
 gpg --export --armor 2B5C1B00 | apt-key add -
 printf "deb http://www.apache.org/dist/cassandra/debian 20x main\ndeb-src http://www.apache.org/dist/cassandra/debian 20x main" > /etc/apt/sources.list.d/cassandra.list
 
+# RabbitMQ
+wget -qO - http://www.rabbitmq.com/rabbitmq-signing-key-public.asc | apt-key add -
+echo "deb http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.d/rabbitmq.list
+
 # Nginx native
 #wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
 #printf "deb http://nginx.org/packages/debian/ wheezy nginx\ndeb-src http://nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sources.list.d/nginx.list
@@ -50,6 +54,7 @@ apt-get install locales locales-all fail2ban resolvconf ntp -y
 apt-get install libedit-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install oracle-java7-installer -y
 #apt-get install elasticsearch -y
+apt-get install rabbitmq-server
 
 dpkg-reconfigure locales
 dpkg-reconfigure tzdata
