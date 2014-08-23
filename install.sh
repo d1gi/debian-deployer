@@ -41,6 +41,10 @@ printf "deb http://www.apache.org/dist/cassandra/debian 20x main\ndeb-src http:/
 wget -qO - http://www.rabbitmq.com/rabbitmq-signing-key-public.asc | apt-key add -
 echo "deb http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.d/rabbitmq.list
 
+# Subversion 1.8
+wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
+echo "deb http://staging.opensource.wandisco.com/debian wheezy svn18" > /etc/apt/sources.list.d/subversion.list
+
 # Nginx native
 #wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
 #printf "deb http://nginx.org/packages/debian/ wheezy nginx\ndeb-src http://nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sources.list.d/nginx.list
@@ -50,7 +54,7 @@ wget -qO- https://deb.nodesource.com/setup_nodesource_repo | bash -
 
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit python-software-properties -y
-apt-get install locales locales-all fail2ban resolvconf ntp -y
+apt-get install locales locales-all fail2ban resolvconf subversion ntp -y
 apt-get install libedit-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install oracle-java7-installer -y
 #apt-get install elasticsearch -y
