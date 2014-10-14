@@ -42,3 +42,5 @@ alias mv='mv -i'
 if [ -e /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash ]; then
     . /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash
 fi
+
+alias s2="php app/console"
