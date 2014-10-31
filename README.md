@@ -87,3 +87,4 @@ create-apache-vhost.php mysite.ru
  *  IonCube Loader (https://www.digitalocean.com/community/tutorials/how-to-install-ioncube-loader)
  *  Install via tar archive
  *  HTTPS
+ *  PECL uploadprogress и/или apc.rfc1867 = 1
