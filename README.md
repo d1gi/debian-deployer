@@ -88,3 +88,4 @@ create-apache-vhost.php mysite.ru
  *  Install via tar archive
  *  HTTPS
  *  PECL uploadprogress и/или apc.rfc1867 = 1
+ *  http://www.shellhacks.com/ru/Ustanovka-i-Nastroyka-Fail2ban-v-CentOS-Ubuntu
