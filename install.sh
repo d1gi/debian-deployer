@@ -124,3 +124,5 @@ apt-get clean
 service apache2 restart
 service mysql restart
 service nginx restart
+
+gem install capifony
