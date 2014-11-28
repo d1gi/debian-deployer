@@ -49,8 +49,10 @@ varnish
 **Deactivated packages:**
 ```
 cassandra
-postgresql
+elasticsearch
 mongodb-org
+postgresql
+rabbitmq-server
 ```
 
 Use screen

@@ -58,7 +58,7 @@ apt-get install locales locales-all fail2ban resolvconf subversion ntp imagemagi
 apt-get install libedit-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install oracle-java7-installer -y
 #apt-get install elasticsearch -y
-apt-get install rabbitmq-server -y
+#apt-get install rabbitmq-server -y
 
 dpkg-reconfigure locales
 dpkg-reconfigure tzdata
