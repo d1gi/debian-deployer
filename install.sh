@@ -68,7 +68,7 @@ apt-get install redis-server -y
 apt-get install mariadb-server -y
 #apt-get install postgresql -y
 #apt-get install cassandra -y
-#apt-get install mongodb-org -y
+#apt-get install mongodb-org php5-mongo -y
 #apt-get install mysql-server mysql-client -y
 
 # Web server
