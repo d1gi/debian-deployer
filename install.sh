@@ -31,6 +31,7 @@ wget -qO - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add
 echo "deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
 
 # Apache Cassandra
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 749D6EEC0353B12C
 gpg --keyserver pgp.mit.edu --recv-keys F758CE318D77295D
 gpg --export --armor F758CE318D77295D | apt-key add -
 gpg --keyserver pgp.mit.edu --recv-keys 2B5C1B00
