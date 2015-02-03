@@ -55,7 +55,7 @@ wget -qO- https://deb.nodesource.com/setup_nodesource_repo | bash -
 
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit python-software-properties -y
-apt-get install locales locales-all fail2ban resolvconf subversion ntp imagemagick hdparam -y
+apt-get install locales locales-all fail2ban resolvconf subversion ntp imagemagick hdparam p7zip -y
 apt-get install libedit-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install oracle-java8-installer -y
 #apt-get install elasticsearch -y
@@ -67,7 +67,7 @@ dpkg-reconfigure tzdata
 # БД
 apt-get install redis-server -y
 apt-get install mariadb-server -y
-#apt-get install postgresql -y
+#apt-get install postgresql postgresql-contrib -y
 #apt-get install cassandra -y
 #apt-get install mongodb-org php5-mongo -y
 #apt-get install mysql-server mysql-client -y
