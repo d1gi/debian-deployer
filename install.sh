@@ -8,7 +8,7 @@ echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-3.0" > /etc/apt/
 
 # dotdeb
 wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
-printf "deb http://packages.dotdeb.org wheezy-php55 all\ndeb-src http://packages.dotdeb.org wheezy-php55 all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ stable all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ stable all" > /etc/apt/sources.list.d/dotdeb.list
+printf "deb http://packages.dotdeb.org wheezy-php56 all\ndeb-src http://packages.dotdeb.org wheezy-php56 all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ stable all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ stable all" > /etc/apt/sources.list.d/dotdeb.list
 
 # PostgreSQL
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
@@ -51,11 +51,12 @@ echo "deb http://staging.opensource.wandisco.com/debian wheezy svn18" > /etc/apt
 #printf "deb http://nginx.org/packages/debian/ wheezy nginx\ndeb-src http://nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sources.list.d/nginx.list
 
 # NodeJS
+#  in this step apt-get update will executes automatically
 wget -qO- https://deb.nodesource.com/setup_nodesource_repo | bash -
 
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit python-software-properties -y
-apt-get install locales locales-all fail2ban resolvconf subversion ntp imagemagick hdparam p7zip -y
+apt-get install locales locales-all fail2ban resolvconf subversion sudo ntp imagemagick hdparam p7zip -y
 apt-get install libedit-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install oracle-java8-installer -y
 #apt-get install elasticsearch -y
@@ -76,6 +77,14 @@ apt-get install mariadb-server -y
 apt-get install apache2 apache2-mpm-prefork libapache2-mod-php5 libapache2-mod-rpaf memcached php5 php5-dev php5-cli php5-fpm -y
 apt-get install php5-apcu php-pear php5-gd php5-intl php5-curl php5-geoip php5-gmp php5-imagick php5-mcrypt php5-sqlite php5-ssh2 -y
 apt-get install php5-snmp php5-xmlrpc php5-xsl php5-mysqlnd php5-pgsql php5-tidy php5-redis php5-memcache php5-memcached -y
+
+ln -s /etc/php5/global-php5.ini /etc/php5/apache2/conf.d/00-global-php5.ini
+ln -s /etc/php5/global-php5.ini /etc/php5/cli/conf.d/00-global-php5.ini
+ln -s /etc/php5/global-php5.ini /etc/php5/fpm/conf.d/00-global-php5.ini
+
+ln -s /etc/php5/php5-apache.ini /etc/php5/apache2/conf.d/01-php5-apache.ini
+ln -s /etc/php5/php5-cli.ini /etc/php5/cli/conf.d/01-php5-cli.ini
+ln -s /etc/php5/php5-fpm.ini /etc/php5/fpm/conf.d/01-php5-fpm.ini
 
 rm /etc/apache2/sites-enabled/000-default
 a2enmod rewrite

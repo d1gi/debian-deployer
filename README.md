@@ -92,6 +92,4 @@ create-apache-vhost.php mysite.ru
  *  PECL uploadprogress и/или apc.rfc1867 = 1
  *  http://www.shellhacks.com/ru/Ustanovka-i-Nastroyka-Fail2ban-v-CentOS-Ubuntu
  *  apache-autoconf.conf (https://github.com/helios-ag/symfony-website-config)
- *  PHP 5.6
  *  MUnin (http://habrahabr.ru/post/30494/)
- *  Вынести настройки PHP в отдельный файл, например так (https://github.com/everzet/dotfiles/blob/master/rc/php/99-everzet.ini)
