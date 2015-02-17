@@ -34,9 +34,9 @@ Default installed soft
 
 ```
 apache2
-php5.5
-php5.5-fpm
-oracle-java7
+php5.6
+php5.6-fpm
+oracle-java8
 redis-server
 mariadb-server
 igbinary
@@ -93,3 +93,4 @@ create-apache-vhost.php mysite.ru
  *  http://www.shellhacks.com/ru/Ustanovka-i-Nastroyka-Fail2ban-v-CentOS-Ubuntu
  *  apache-autoconf.conf (https://github.com/helios-ag/symfony-website-config)
  *  MUnin (http://habrahabr.ru/post/30494/)
+ *  https://developers.google.com/speed/pagespeed/module

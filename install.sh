@@ -56,7 +56,7 @@ wget -qO- https://deb.nodesource.com/setup_nodesource_repo | bash -
 
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit python-software-properties -y
-apt-get install locales locales-all fail2ban resolvconf subversion sudo ntp imagemagick hdparam p7zip -y
+apt-get install bash-completion locales locales-all fail2ban resolvconf subversion sudo ntp imagemagick hdparam p7zip -y
 apt-get install libedit-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install oracle-java8-installer -y
 #apt-get install elasticsearch -y
@@ -125,7 +125,7 @@ git clone https://github.com/KnpLabs/symfony2-autocomplete.git /usr/share/symfon
 
 # @todo pma и pga
 # http://www.phpmyadmin.net/home_page/version.json
-# wget http://heanet.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.2.7/phpMyAdmin-4.2.7-all-languages.zip
+# wget http://heanet.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.3.9/phpMyAdmin-4.3.9-all-languages.zip
 # wget http://cznic.dl.sourceforge.net/project/phppgadmin/phpPgAdmin%20%5Bstable%5D/phpPgAdmin-5.1/phpPgAdmin-5.1.zip
 
 apt-get install postfix -y
