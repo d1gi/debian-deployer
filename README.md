@@ -82,6 +82,11 @@ Create virtual hosts
 create-apache-vhost.php mysite.ru
 ```
 
+Linux Add a Swap File – Howto
+-----------------------------
+
+http://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/
+
 @todo
 -----
 
