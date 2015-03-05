@@ -111,7 +111,8 @@ then
     mv ~/.bashrc ~/.bashrc_old
     cp -R new/etc / -v
     cp -R new/usr / -v
-    cp -v create-apache-vhost.php /usr/local/bin/create-apache-vhost.php
+    cp -v create-apache-vhost /usr/local/bin/create-apache-vhost
+    cp -v create-nginx-vhost /usr/local/bin/create-nginx-vhost
     cp -R new/root /
 fi
 

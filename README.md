@@ -79,7 +79,8 @@ Create virtual hosts
 --------------------
 
 ```
-create-apache-vhost.php mysite.ru
+create-apache-vhost mysite.ru
+create-nginx-vhost mysite.ru
 ```
 
 Linux Add a Swap File – Howto
