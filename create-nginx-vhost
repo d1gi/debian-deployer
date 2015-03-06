@@ -18,10 +18,16 @@ server {
     server_name '.$domain.';
     root /var/www/'.$domain.'/web;
 
+    # Deny all . files
+    location ~ /\.(ht|git) {
+        deny all;
+    }
+
     location / {
         # try to serve file directly, fallback to app.php
         try_files $uri /app.php$is_args$args;
     }
+
     location ~ ^/app\.php(/|$) {
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
@@ -34,16 +40,39 @@ server {
         internal;
     }
 
+    # Statics
+    location /(bundles|media) {
+        access_log off;
+        expires 30d;
+
+        # Font files
+        #if ($filename ~* ^.*?\.(eot)|(ttf)|(woff)$){
+        # add_header Access-Control-Allow-Origin *;
+        #}
+
+        try_files $uri @rewriteapp;
+    }
+
     error_log /var/log/nginx/'.$domain.'_errors.log;
     access_log /var/log/nginx/'.$domain.'_access.log;
 }
 ';
+
+$robotsTxt = "
+# www.robotstxt.org/
+# www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
+
+User-Agent: *
+Disallow: /cgi-bin/
+Disallow: /admin/
+";
 
 file_put_contents('/etc/nginx/sites-enabled/'.$domain.'.conf', $conf);
 
 mkdir("/var/www/{$domain}");
 mkdir("/var/www/{$domain}/web");
 file_put_contents("/var/www/{$domain}/web/app.php", $domain . ' is under construction...');
+file_put_contents("/var/www/{$domain}/web/robots.txt", $robotsTxt);
 system("chown -hR www-data:www-data /var/www/{$domain}/web");
 
 system('service nginx reload');

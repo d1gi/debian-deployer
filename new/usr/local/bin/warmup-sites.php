@@ -6,6 +6,6 @@ $directory = '/var/www';
 
 foreach (array_diff(scandir($directory), ['..', '.']) as $dir) {
     if (is_dir($directory . '/' . $dir)) {
-        system("curl http://{$dir} > /dev/null");
+        system("curl http://{$dir}/?__warmup__ > /dev/null");
     }
 }
