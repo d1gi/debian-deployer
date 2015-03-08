@@ -41,7 +41,7 @@ server {
     }
 
     # Statics
-    location ~ /(bundles|media|_media) {
+    location ~ ^/bundles {
         access_log off;
         expires 30d;
 
@@ -50,6 +50,16 @@ server {
         # add_header Access-Control-Allow-Origin *;
         #}
 
+        try_files $uri @rewriteapp;
+    }
+    location ~ ^/_media {
+        access_log off;
+        expires 30d;
+        try_files $uri @rewriteapp;
+    }
+    location ~ ^/media {
+        access_log off;
+        expires 30d;
         try_files $uri @rewriteapp;
     }
 
