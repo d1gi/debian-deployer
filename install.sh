@@ -8,7 +8,7 @@ echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-3.0" > /etc/apt/
 
 # dotdeb
 wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
-printf "deb http://packages.dotdeb.org wheezy-php56 all\ndeb-src http://packages.dotdeb.org wheezy-php56 all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ stable all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ stable all" > /etc/apt/sources.list.d/dotdeb.list
+printf "deb http://packages.dotdeb.org wheezy-php56 all\ndeb-src http://packages.dotdeb.org wheezy-php56 all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all" > /etc/apt/sources.list.d/dotdeb.list
 
 # PostgreSQL
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
