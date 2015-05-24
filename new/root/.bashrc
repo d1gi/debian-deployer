@@ -38,6 +38,9 @@ alias l='ls $LS_OPTIONS -lA'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
 
 if [ -e /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash ]; then
     . /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash
