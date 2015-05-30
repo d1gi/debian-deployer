@@ -19,8 +19,9 @@ apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
 printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main" > /etc/apt/sources.list.d/mariadb.list
 
 # MongoDB
-apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-echo "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen" > /etc/apt/sources.list.d/mongodb.list
+apt-key adv --keyserver keyserver.ubuntu.com --recv 9ECBEC467F0CEB10
+#echo "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen" > /etc/apt/sources.list.d/mongodb.list
+echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main" > /etc/apt/sources.list.d/mongodb.list
 
 # Java
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
@@ -28,7 +29,7 @@ printf "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main\ndeb-s
 
 # elasticsearch
 wget -qO - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
-echo "deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
+echo "deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
 
 # Apache Cassandra
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 749D6EEC0353B12C
@@ -70,7 +71,8 @@ apt-get install redis-server -y
 apt-get install mariadb-server -y
 #apt-get install postgresql postgresql-contrib -y
 #apt-get install cassandra -y
-#apt-get install mongodb-org php5-mongo -y
+#apt-get install mongodb php5-mongo -y
+#apt-get install mongodb-org=3.0.3 php5-mongo -y
 #apt-get install mysql-server mysql-client -y
 
 # Web server
