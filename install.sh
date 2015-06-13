@@ -75,6 +75,17 @@ apt-get install mariadb-server -y
 #apt-get install mongodb-org=3.0.3 php5-mongo -y
 #apt-get install mysql-server mysql-client -y
 
+# Configs
+if [ ! -f ~/.bashrc_old ]
+then
+    mv ~/.bashrc ~/.bashrc_old
+    cp -R new/etc / -v
+    cp -R new/usr / -v
+    cp -v create-apache-vhost /usr/local/bin/create-apache-vhost
+    cp -v create-nginx-vhost /usr/local/bin/create-nginx-vhost
+    cp -R new/root /
+fi
+
 # Web server
 apt-get install apache2 apache2-mpm-prefork libapache2-mod-php5 libapache2-mod-rpaf memcached php5 php5-dev php5-cli php5-fpm -y
 apt-get install php5-apcu php-pear php5-gd php5-intl php5-curl php5-geoip php5-gmp php5-imagick php5-mcrypt php5-sqlite php5-ssh2 -y
@@ -107,16 +118,14 @@ ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/apache2/conf.d/20-igbinary
 ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/cli/conf.d/20-igbinary.ini
 ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/fpm/conf.d/20-igbinary.ini
 
-# Configs
-if [ ! -f ~/.bashrc_old ]
-then
-    mv ~/.bashrc ~/.bashrc_old
-    cp -R new/etc / -v
-    cp -R new/usr / -v
-    cp -v create-apache-vhost /usr/local/bin/create-apache-vhost
-    cp -v create-nginx-vhost /usr/local/bin/create-nginx-vhost
-    cp -R new/root /
-fi
+# Twig
+git clone https://github.com/twigphp/Twig.git ~/Twig
+cd ~/Twig/ext/twig
+phpize;./configure;make;make install
+ln -s /etc/php5/mods-available/twig.ini /etc/php5/apache2/conf.d/20-twig.ini
+ln -s /etc/php5/mods-available/twig.ini /etc/php5/cli/conf.d/20-twig.ini
+ln -s /etc/php5/mods-available/twig.ini /etc/php5/fpm/conf.d/20-twig.ini
+cd ~
 
 mkdir /var/log/php
 chmod 0777 /var/log/php
@@ -135,6 +144,7 @@ apt-get install postfix -y
 
 apt-get clean
 service apache2 restart
+service php5-fpm restart
 service mysql restart
 service nginx restart
 
