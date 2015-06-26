@@ -53,7 +53,7 @@ echo "deb http://staging.opensource.wandisco.com/debian wheezy svn18" > /etc/apt
 
 # NodeJS
 #  in this step apt-get update will executes automatically
-wget -qO- https://deb.nodesource.com/setup_nodesource_repo | bash -
+wget -qO- https://deb.nodesource.com/setup_0.12 | bash -
 
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit python-software-properties -y
