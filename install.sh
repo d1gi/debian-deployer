@@ -8,7 +8,7 @@ echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-3.0" > /etc/apt/
 
 # dotdeb
 wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
-printf "deb http://packages.dotdeb.org wheezy-php56 all\ndeb-src http://packages.dotdeb.org wheezy-php56 all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all" > /etc/apt/sources.list.d/dotdeb.list
+printf "deb http://packages.dotdeb.org wheezy all\ndeb-src http://packages.dotdeb.org wheezy all\ndeb http://packages.dotdeb.org wheezy-php56 all\ndeb-src http://packages.dotdeb.org wheezy-php56 all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all" > /etc/apt/sources.list.d/dotdeb.list
 
 # PostgreSQL
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
@@ -75,17 +75,6 @@ apt-get install mariadb-server -y
 #apt-get install mongodb-org=3.0.3 php5-mongo -y
 #apt-get install mysql-server mysql-client -y
 
-# Configs
-if [ ! -f ~/.bashrc_old ]
-then
-    mv ~/.bashrc ~/.bashrc_old
-    cp -R new/etc / -v
-    cp -R new/usr / -v
-    cp -v create-apache-vhost /usr/local/bin/create-apache-vhost
-    cp -v create-nginx-vhost /usr/local/bin/create-nginx-vhost
-    cp -R new/root /
-fi
-
 # Web server
 apt-get install apache2 apache2-mpm-prefork libapache2-mod-php5 libapache2-mod-rpaf memcached php5 php5-dev php5-cli php5-fpm -y
 apt-get install php5-apcu php-pear php5-gd php5-intl php5-curl php5-geoip php5-gmp php5-imagick php5-mcrypt php5-sqlite php5-ssh2 -y
@@ -104,6 +93,17 @@ a2enmod rewrite
 a2enmod php5
 
 apt-get install nodejs nginx -y
+
+# Configs
+if [ ! -f ~/.bashrc_old ]
+then
+    mv ~/.bashrc ~/.bashrc_old
+    cp -R new/etc / -v
+    cp -R new/usr / -v
+    cp -R new/root / -v
+    cp -v create-apache-vhost /usr/local/bin/create-apache-vhost
+    cp -v create-nginx-vhost /usr/local/bin/create-nginx-vhost
+fi
 
 # Cache
 apt-get install varnish -y

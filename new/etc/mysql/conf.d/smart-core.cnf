@@ -1,4 +1,5 @@
 [mysqld]
+binlog_format=mixed
 transaction-isolation=READ-COMMITTED
 max_heap_table_size = 32M
 innodb_file_per_table=1
