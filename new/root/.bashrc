@@ -38,9 +38,13 @@ alias l='ls $LS_OPTIONS -lA'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+alias s2="php app/console"
+alias sf="php app/console"
+alias cdw="cd /var/www"
 
 if [ -e /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash ]; then
     . /usr/share/symfony2-autocomplete/symfony2-autocomplete.bash
 fi
-
-alias s2="php app/console"

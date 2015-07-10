@@ -8,7 +8,7 @@ echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-3.0" > /etc/apt/
 
 # dotdeb
 wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
-printf "deb http://packages.dotdeb.org wheezy-php56 all\ndeb-src http://packages.dotdeb.org wheezy-php56 all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ stable all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ stable all" > /etc/apt/sources.list.d/dotdeb.list
+printf "deb http://packages.dotdeb.org wheezy all\ndeb-src http://packages.dotdeb.org wheezy all\ndeb http://packages.dotdeb.org wheezy-php56 all\ndeb-src http://packages.dotdeb.org wheezy-php56 all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all" > /etc/apt/sources.list.d/dotdeb.list
 
 # PostgreSQL
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
@@ -19,8 +19,9 @@ apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
 printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main" > /etc/apt/sources.list.d/mariadb.list
 
 # MongoDB
-apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-echo "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen" > /etc/apt/sources.list.d/mongodb.list
+apt-key adv --keyserver keyserver.ubuntu.com --recv 9ECBEC467F0CEB10
+#echo "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen" > /etc/apt/sources.list.d/mongodb.list
+echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main" > /etc/apt/sources.list.d/mongodb.list
 
 # Java
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
@@ -28,7 +29,7 @@ printf "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main\ndeb-s
 
 # elasticsearch
 wget -qO - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
-echo "deb http://packages.elasticsearch.org/elasticsearch/1.3/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
+echo "deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
 
 # Apache Cassandra
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 749D6EEC0353B12C
@@ -52,12 +53,12 @@ echo "deb http://staging.opensource.wandisco.com/debian wheezy svn18" > /etc/apt
 
 # NodeJS
 #  in this step apt-get update will executes automatically
-wget -qO- https://deb.nodesource.com/setup_nodesource_repo | bash -
+wget -qO- https://deb.nodesource.com/setup_0.12 | bash -
 
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit python-software-properties -y
-apt-get install bash-completion locales locales-all fail2ban resolvconf subversion sudo ntp imagemagick hdparam p7zip -y
-apt-get install libedit-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
+apt-get install bash-completion locales locales-all fail2ban resolvconf subversion sudo ntp imagemagick p7zip tree -y
+apt-get install libedit-dev libevent-dev libcurl4-openssl-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install oracle-java8-installer -y
 #apt-get install elasticsearch -y
 #apt-get install rabbitmq-server -y
@@ -70,7 +71,8 @@ apt-get install redis-server -y
 apt-get install mariadb-server -y
 #apt-get install postgresql postgresql-contrib -y
 #apt-get install cassandra -y
-#apt-get install mongodb-org php5-mongo -y
+#apt-get install mongodb php5-mongo -y
+#apt-get install mongodb-org=3.0.3 php5-mongo -y
 #apt-get install mysql-server mysql-client -y
 
 # Web server
@@ -92,6 +94,17 @@ a2enmod php5
 
 apt-get install nodejs nginx -y
 
+# Configs
+if [ ! -f ~/.bashrc_old ]
+then
+    mv ~/.bashrc ~/.bashrc_old
+    cp -R new/etc / -v
+    cp -R new/usr / -v
+    cp -R new/root / -v
+    cp -v create-apache-vhost /usr/local/bin/create-apache-vhost
+    cp -v create-nginx-vhost /usr/local/bin/create-nginx-vhost
+fi
+
 # Cache
 apt-get install varnish -y
 
@@ -105,16 +118,14 @@ ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/apache2/conf.d/20-igbinary
 ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/cli/conf.d/20-igbinary.ini
 ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/fpm/conf.d/20-igbinary.ini
 
-# Configs
-if [ ! -f ~/.bashrc_old ]
-then
-    mv ~/.bashrc ~/.bashrc_old
-    cp -R new/etc / -v
-    cp -R new/usr / -v
-    cp -v create-apache-vhost /usr/local/bin/create-apache-vhost
-    cp -v create-nginx-vhost /usr/local/bin/create-nginx-vhost
-    cp -R new/root /
-fi
+# Twig
+git clone https://github.com/twigphp/Twig.git ~/Twig
+cd ~/Twig/ext/twig
+phpize;./configure;make;make install
+ln -s /etc/php5/mods-available/twig.ini /etc/php5/apache2/conf.d/20-twig.ini
+ln -s /etc/php5/mods-available/twig.ini /etc/php5/cli/conf.d/20-twig.ini
+ln -s /etc/php5/mods-available/twig.ini /etc/php5/fpm/conf.d/20-twig.ini
+cd ~
 
 mkdir /var/log/php
 chmod 0777 /var/log/php
@@ -133,6 +144,7 @@ apt-get install postfix -y
 
 apt-get clean
 service apache2 restart
+service php5-fpm restart
 service mysql restart
 service nginx restart
 
