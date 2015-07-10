@@ -28,6 +28,7 @@ case "${TERM}" in
 esac
 
 # You may uncomment the following lines if you want `ls' to be colorized:
+export EDITOR='mcedit'
 export LS_OPTIONS='--color=auto'
 eval "`dircolors`"
 alias ls='ls $LS_OPTIONS'
