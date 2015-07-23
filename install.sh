@@ -78,7 +78,7 @@ apt-get install mariadb-server -y
 # Web server
 apt-get install apache2 apache2-mpm-prefork libapache2-mod-php5 libapache2-mod-rpaf memcached php5 php5-dev php5-cli php5-fpm -y
 apt-get install php5-apcu php-pear php5-gd php5-intl php5-curl php5-geoip php5-gmp php5-imagick php5-mcrypt php5-sqlite php5-ssh2 -y
-apt-get install php5-snmp php5-xmlrpc php5-xsl php5-mysqlnd php5-pgsql php5-tidy php5-redis php5-memcache php5-memcached -y
+apt-get install php5-snmp php5-xmlrpc php5-xsl php5-mysqlnd php5-pgsql php5-tidy php5-redis php5-memcache php5-memcached php5-imap -y
 
 ln -s /etc/php5/global-php5.ini /etc/php5/apache2/conf.d/00-global-php5.ini
 ln -s /etc/php5/global-php5.ini /etc/php5/cli/conf.d/00-global-php5.ini
