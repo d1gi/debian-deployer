@@ -155,7 +155,6 @@ service nginx restart
 # https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-an-debian-7-0-wheezy-vps-using-rvm
 curl -L https://get.rvm.io | bash -s stable --ruby
 source /etc/profile.d/rvm.sh
-#rvm install 2.2-head
 #source /usr/local/rvm/scripts/rvm
 #apt-get install ruby ruby-dev
 gem install capifony
