@@ -59,10 +59,10 @@ echo "deb http://staging.opensource.wandisco.com/debian wheezy svn18" > /etc/apt
 wget -qO- https://deb.nodesource.com/setup_5.x | bash -
 
 # Базовый софт
+apt-get install dialog apt-utils -y
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip dnsutils monit python-software-properties -y
 apt-get install acl bash-completion locales locales-all fail2ban resolvconf subversion sudo ntp imagemagick p7zip tree -y
 apt-get install libedit-dev libevent-dev libcurl4-openssl-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
-apt-get install dialog apt-utils -y
 apt-get install oracle-java8-installer -y
 #apt-get install elasticsearch -y
 #apt-get install rabbitmq-server -y
@@ -142,7 +142,6 @@ git clone https://github.com/KnpLabs/symfony2-autocomplete.git /usr/share/symfon
 # @todo pma и pga
 # http://www.phpmyadmin.net/home_page/version.json
 # wget https://files.phpmyadmin.net/phpMyAdmin/4.5.0.2/phpMyAdmin-4.5.0.2-all-languages.zip
-# https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-an-debian-7-0-wheezy-vps-using-rvm
 
 apt-get install postfix -y
 
@@ -153,6 +152,7 @@ service mysql restart
 service nginx restart
 
 # Ruby
+# https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-an-debian-7-0-wheezy-vps-using-rvm
 curl -L https://get.rvm.io | bash -s stable --ruby
 source /etc/profile.d/rvm.sh
 #rvm install 2.2-head
