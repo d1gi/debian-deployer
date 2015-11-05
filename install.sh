@@ -56,7 +56,7 @@ echo "deb http://staging.opensource.wandisco.com/debian wheezy svn18" > /etc/apt
 
 # NodeJS
 #  in this step apt-get update will executes automatically
-wget -qO- https://deb.nodesource.com/setup_0.12 | bash -
+wget -qO- https://deb.nodesource.com/setup_5.x | bash -
 
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip dnsutils monit python-software-properties -y
@@ -153,6 +153,9 @@ service mysql restart
 service nginx restart
 
 # Ruby
-curl -L https://get.rvm.io | bash -s stable --rails
-apt-get install ruby ruby-dev
+curl -L https://get.rvm.io | bash -s stable --ruby
+source /etc/profile.d/rvm.sh
+#rvm install 2.2-head
+#source /usr/local/rvm/scripts/rvm
+#apt-get install ruby ruby-dev
 gem install capifony
