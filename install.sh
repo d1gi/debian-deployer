@@ -43,6 +43,9 @@ printf "deb http://www.apache.org/dist/cassandra/debian 20x main\ndeb-src http:/
 wget -qO - http://www.rabbitmq.com/rabbitmq-signing-key-public.asc | apt-key add -
 echo "deb http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.d/rabbitmq.list
 
+# Ruby Version Manager
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+
 # Subversion 1.8
 wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
 echo "deb http://staging.opensource.wandisco.com/debian wheezy svn18" > /etc/apt/sources.list.d/subversion.list
@@ -56,7 +59,7 @@ echo "deb http://staging.opensource.wandisco.com/debian wheezy svn18" > /etc/apt
 wget -qO- https://deb.nodesource.com/setup_0.12 | bash -
 
 # Базовый софт
-apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip ruby ruby-dev dnsutils monit python-software-properties -y
+apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip dnsutils monit python-software-properties -y
 apt-get install acl bash-completion locales locales-all fail2ban resolvconf subversion sudo ntp imagemagick p7zip tree -y
 apt-get install libedit-dev libevent-dev libcurl4-openssl-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
 apt-get install dialog apt-utils -y
@@ -138,8 +141,8 @@ git clone https://github.com/KnpLabs/symfony2-autocomplete.git /usr/share/symfon
 
 # @todo pma и pga
 # http://www.phpmyadmin.net/home_page/version.json
-# wget http://heanet.dl.sourceforge.net/project/phpmyadmin/phpMyAdmin/4.3.9/phpMyAdmin-4.3.9-all-languages.zip
-# wget http://cznic.dl.sourceforge.net/project/phppgadmin/phpPgAdmin%20%5Bstable%5D/phpPgAdmin-5.1/phpPgAdmin-5.1.zip
+# wget https://files.phpmyadmin.net/phpMyAdmin/4.5.0.2/phpMyAdmin-4.5.0.2-all-languages.zip
+# https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-an-debian-7-0-wheezy-vps-using-rvm
 
 apt-get install postfix -y
 
@@ -149,4 +152,7 @@ service php5-fpm restart
 service mysql restart
 service nginx restart
 
+# Ruby
+curl -L https://get.rvm.io | bash -s stable --rails
+apt-get install ruby ruby-dev
 gem install capifony
