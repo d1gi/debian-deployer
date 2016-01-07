@@ -94,7 +94,8 @@ apt-get install dialog apt-utils -y
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip dnsutils monit python-software-properties -y
 apt-get install acl bash-completion locales locales-all fail2ban resolvconf subversion sudo ntp imagemagick p7zip tree -y
 apt-get install libedit-dev libevent-dev libcurl4-openssl-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
-apt-get install fcgiwrap libgd-tools snmp oracle-java8-installer -y
+apt-get install fcgiwrap libgd-tools snmp -y
+apt-get install oracle-java8-installer -y
 #apt-get install elasticsearch -y
 #apt-get install rabbitmq-server -y
 
@@ -130,6 +131,7 @@ a2enmod rewrite
 a2enmod php5
 
 apt-get install nodejs nginx -y
+chmod 0777 /var/log/nginx
 
 # Configs
 if [ ! -f ~/.bashrc_old ]
