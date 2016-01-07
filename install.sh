@@ -4,7 +4,7 @@ apt-get install apt-transport-https -y
 
 VERSION=$(cat /etc/debian_version | head -c 1)
 
-if (( $VER == 7 ))
+if (( $VERSION == 7 ))
 then
     echo "Wheezy installer."
 
@@ -28,7 +28,7 @@ then
     wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
     echo "deb http://staging.opensource.wandisco.com/debian wheezy svn19" > /etc/apt/sources.list.d/subversion.list
 
-elif (( $VER == 8 ))
+elif (( $VERSION == 8 ))
 then
     echo "Jessie installer."
 
@@ -138,7 +138,7 @@ then
     cp -R common/etc / -v
     cp -R common/usr / -v
     cp -R common/root / -v
-    cp -R "debian$VER/etc" / -v
+    cp -R "debian$VERSION/etc" / -v
     cp -v create-apache-vhost /usr/local/bin/create-apache-vhost
     cp -v create-nginx-vhost /usr/local/bin/create-nginx-vhost
 fi
