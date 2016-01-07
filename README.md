@@ -1,4 +1,4 @@
-Debian 7.x Deployer
+Debian 7 and 8 Deployer
 ===================
 
 Installation
