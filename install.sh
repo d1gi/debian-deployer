@@ -63,8 +63,10 @@ fi
 
 # MongoDB
 apt-key adv --keyserver keyserver.ubuntu.com --recv 9ECBEC467F0CEB10
+apt-key adv --keyserver keyserver.ubuntu.com --recv D68FA50FEA312927
+apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv EA312927
 #echo "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen" > /etc/apt/sources.list.d/mongodb.list
-echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main" > /etc/apt/sources.list.d/mongodb.list
+echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.2 main" > /etc/apt/sources.list.d/mongodb.list
 
 # Java
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
@@ -111,8 +113,8 @@ apt-get install redis-server -y
 apt-get install mariadb-server -y
 #apt-get install postgresql postgresql-contrib -y
 #apt-get install cassandra -y
+#apt-get install mongodb-org php5-mongo -y
 #apt-get install mongodb php5-mongo -y
-#apt-get install mongodb-org=3.0.3 php5-mongo -y
 #apt-get install mysql-server mysql-client -y
 
 # Web server
