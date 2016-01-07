@@ -51,8 +51,8 @@ wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
 echo "deb http://staging.opensource.wandisco.com/debian jessie svn18" > /etc/apt/sources.list.d/subversion.list
 
 # Nginx native
-#wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
-#printf "deb http://nginx.org/packages/debian/ wheezy nginx\ndeb-src http://nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sources.list.d/nginx.list
+wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
+printf "deb http://nginx.org/packages/debian/ jessie nginx\ndeb-src http://nginx.org/packages/debian/ jessie nginx" > /etc/apt/sources.list.d/nginx.list
 
 # NodeJS
 #  in this step apt-get update will executes automatically
@@ -60,14 +60,14 @@ wget -qO- https://deb.nodesource.com/setup_5.x | bash -
 
 # Базовый софт
 
-# Добавить пакеты: libgd-tools fcgiwrap gawk libreadline6-dev libyaml-dev libsqlite3-dev sqlite3 libgdbm-dev bison libffi-dev
-# Разобраться с обновлением до акутальной версии: elasticsearch до 2.x
-
 apt-get install dialog apt-utils -y
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip dnsutils monit python-software-properties -y
 apt-get install acl bash-completion locales locales-all fail2ban resolvconf subversion sudo ntp imagemagick p7zip tree -y
 apt-get install libedit-dev libevent-dev libcurl4-openssl-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
+apt-get install fcgiwrap libgd-tools snmp -y
 apt-get install oracle-java8-installer -y
+
+# @todo Разобраться с обновлением до акутальной версии: elasticsearch до 2.x
 #apt-get install elasticsearch -y
 #apt-get install rabbitmq-server -y
 
@@ -87,7 +87,7 @@ apt-get install mariadb-server -y
 apt-get install apache2 apache2-mpm-prefork libapache2-mod-php5 libapache2-mod-rpaf memcached php5 php5-dev php5-cli php5-fpm -y
 apt-get install php5-apcu php-pear php5-gd php5-intl php5-curl php5-geoip php5-gmp php5-imagick php5-mcrypt php5-sqlite php5-ssh2 -y
 apt-get install php5-snmp php5-xmlrpc php5-xsl php5-mysqlnd php5-pgsql php5-tidy php5-redis php5-memcache php5-memcached php5-imap -y
-apt-get install php-auth php-auth-sasl php-mail-mime php-mail-mimedecode
+apt-get install php-auth php-auth-sasl php-mail-mime php-mail-mimedecode -y
 
 ln -s /etc/php5/global-php5.ini /etc/php5/apache2/conf.d/00-global-php5.ini
 ln -s /etc/php5/global-php5.ini /etc/php5/cli/conf.d/00-global-php5.ini
