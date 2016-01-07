@@ -32,7 +32,11 @@ elif (( $VERSION == 8 ))
 then
     echo "Jessie installer."
 
-    # Nginx native
+    # Dotdeb
+    wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
+    printf "deb http://packages.dotdeb.org jessie all\ndeb-src http://packages.dotdeb.org jessie all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ jessie all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ jessie all" > /etc/apt/sources.list.d/dotdeb.list
+
+    # Nginx
     wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
     printf "deb http://nginx.org/packages/debian/ jessie nginx\ndeb-src http://nginx.org/packages/debian/ jessie nginx" > /etc/apt/sources.list.d/nginx.list
 
