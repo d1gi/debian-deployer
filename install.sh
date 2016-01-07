@@ -2,21 +2,60 @@
 
 apt-get install apt-transport-https -y
 
-# Varnish
-wget --quiet -O - https://repo.varnish-cache.org/debian/GPG-key.txt | apt-key add -
-echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-3.0" > /etc/apt/sources.list.d/varnish-cache.list
+VERSION=$(cat /etc/debian_version | head -c 1)
 
-# dotdeb
-wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
-printf "deb http://packages.dotdeb.org wheezy all\ndeb-src http://packages.dotdeb.org wheezy all\ndeb http://packages.dotdeb.org wheezy-php56 all\ndeb-src http://packages.dotdeb.org wheezy-php56 all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all" > /etc/apt/sources.list.d/dotdeb.list
+if (( $VER == 7 ))
+then
+    echo "Wheezy installer."
 
-# PostgreSQL
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-echo "deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main" > /etc/apt/sources.list.d/postgresql.list
+    # Dotdeb
+    wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
+    printf "deb http://packages.dotdeb.org wheezy all\ndeb-src http://packages.dotdeb.org wheezy all\ndeb http://packages.dotdeb.org wheezy-php56 all\ndeb-src http://packages.dotdeb.org wheezy-php56 all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ wheezy-php56 all" > /etc/apt/sources.list.d/dotdeb.list
 
-# Maria DB
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
-printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main" > /etc/apt/sources.list.d/mariadb.list
+    # Varnish
+    wget --quiet -O - https://repo.varnish-cache.org/debian/GPG-key.txt | apt-key add -
+    echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-3.0" > /etc/apt/sources.list.d/varnish-cache.list
+
+    # PostgreSQL
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main" > /etc/apt/sources.list.d/postgresql.list
+
+    # Maria DB
+    apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
+    printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian wheezy main" > /etc/apt/sources.list.d/mariadb.list
+
+    # Subversion 1.9
+    wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
+    echo "deb http://staging.opensource.wandisco.com/debian wheezy svn19" > /etc/apt/sources.list.d/subversion.list
+
+elif (( $VER == 8 ))
+then
+    echo "Jessie installer."
+
+    # Nginx native
+    wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
+    printf "deb http://nginx.org/packages/debian/ jessie nginx\ndeb-src http://nginx.org/packages/debian/ jessie nginx" > /etc/apt/sources.list.d/nginx.list
+
+    # Varnish
+    wget --quiet -O - https://repo.varnish-cache.org/debian/GPG-key.txt | apt-key add -
+    echo "deb https://repo.varnish-cache.org/debian/ wheezy varnish-3.0" > /etc/apt/sources.list.d/varnish-cache.list
+
+    # PostgreSQL
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" > /etc/apt/sources.list.d/postgresql.list
+
+    # Maria DB
+    apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
+    printf "deb http://mirror.mephi.ru/mariadb/repo/10.0/debian jessie main\ndeb-src http://mirror.mephi.ru/mariadb/repo/10.0/debian jessie main" > /etc/apt/sources.list.d/mariadb.list
+
+    # Subversion 1.9
+    wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
+    echo "deb http://staging.opensource.wandisco.com/debian jessie svn19" > /etc/apt/sources.list.d/subversion.list
+
+else
+    echo "BAD Debian version"
+    exit
+fi
 
 # MongoDB
 apt-key adv --keyserver keyserver.ubuntu.com --recv 9ECBEC467F0CEB10
@@ -29,7 +68,7 @@ printf "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main\ndeb-s
 
 # elasticsearch
 wget -qO - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
-echo "deb http://packages.elasticsearch.org/elasticsearch/1.5/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
+echo "deb http://packages.elasticsearch.org/elasticsearch/1.7/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
 
 # Apache Cassandra
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 749D6EEC0353B12C
@@ -45,14 +84,6 @@ echo "deb http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.
 
 # Ruby Version Manager
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-
-# Subversion 1.8
-wget -q http://opensource.wandisco.com/wandisco-debian.gpg -O- | apt-key add -
-echo "deb http://staging.opensource.wandisco.com/debian wheezy svn18" > /etc/apt/sources.list.d/subversion.list
-
-# Nginx native
-#wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
-#printf "deb http://nginx.org/packages/debian/ wheezy nginx\ndeb-src http://nginx.org/packages/debian/ wheezy nginx" > /etc/apt/sources.list.d/nginx.list
 
 # NodeJS
 #  in this step apt-get update will executes automatically
@@ -83,8 +114,7 @@ apt-get install mariadb-server -y
 apt-get install apache2 apache2-mpm-prefork libapache2-mod-php5 libapache2-mod-rpaf memcached php5 php5-dev php5-cli php5-fpm -y
 apt-get install php5-apcu php-pear php5-gd php5-intl php5-curl php5-geoip php5-gmp php5-imagick php5-mcrypt php5-sqlite php5-ssh2 -y
 apt-get install php5-snmp php5-xmlrpc php5-xsl php5-mysqlnd php5-pgsql php5-tidy php5-redis php5-memcache php5-memcached php5-imap -y
-
-# php-auth php-auth-sasl php-mail-mime php-mail-mimedecode
+apt-get install php-auth php-auth-sasl php-mail-mime php-mail-mimedecode -y
 
 ln -s /etc/php5/global-php5.ini /etc/php5/apache2/conf.d/00-global-php5.ini
 ln -s /etc/php5/global-php5.ini /etc/php5/cli/conf.d/00-global-php5.ini
@@ -95,6 +125,7 @@ ln -s /etc/php5/php5-cli.ini /etc/php5/cli/conf.d/01-php5-cli.ini
 ln -s /etc/php5/php5-fpm.ini /etc/php5/fpm/conf.d/01-php5-fpm.ini
 
 rm /etc/apache2/sites-enabled/000-default
+rm /etc/apache2/sites-enabled/000-default.conf
 a2enmod rewrite
 a2enmod php5
 
@@ -104,9 +135,10 @@ apt-get install nodejs nginx -y
 if [ ! -f ~/.bashrc_old ]
 then
     mv ~/.bashrc ~/.bashrc_old
-    cp -R new/etc / -v
-    cp -R new/usr / -v
-    cp -R new/root / -v
+    cp -R common/etc / -v
+    cp -R common/usr / -v
+    cp -R common/root / -v
+    cp -R "debian$VER/etc" / -v
     cp -v create-apache-vhost /usr/local/bin/create-apache-vhost
     cp -v create-nginx-vhost /usr/local/bin/create-nginx-vhost
 fi
