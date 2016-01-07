@@ -149,6 +149,7 @@ apt-get install varnish -y
 # Composer
 curl -skS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer.phar
+chmod 0755 /usr/local/bin/composer
 
 # igbinary
 pecl install igbinary
