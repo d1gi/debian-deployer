@@ -64,12 +64,12 @@ fi
 # MongoDB
 apt-key adv --keyserver keyserver.ubuntu.com --recv 9ECBEC467F0CEB10
 apt-key adv --keyserver keyserver.ubuntu.com --recv D68FA50FEA312927
-apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv EA312927
+apt-key adv --keyserver keyserver.ubuntu.com --recv EA312927
 #echo "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen" > /etc/apt/sources.list.d/mongodb.list
 echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.2 main" > /etc/apt/sources.list.d/mongodb.list
 
 # Java
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
 printf "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main\ndeb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" > /etc/apt/sources.list.d/java.list
 
 # elasticsearch
