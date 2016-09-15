@@ -198,6 +198,7 @@ service nginx restart
 
 # Ruby
 # https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-an-debian-7-0-wheezy-vps-using-rvm
+curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 curl -L https://get.rvm.io | bash -s stable --ruby
 source /etc/profile.d/rvm.sh
 #source /usr/local/rvm/scripts/rvm
