@@ -38,7 +38,7 @@ apt-get install apt-transport-https dialog apt-utils locales locales-all -y
 dpkg-reconfigure locales
 dpkg-reconfigure tzdata
 
-apt-get upgrade
+apt-get upgrade -y
 
 if (( $DEBIAN_VERSION == 7 ))
 then
