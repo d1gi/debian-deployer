@@ -5,7 +5,7 @@ Installation
 ------------
 
 ```
-apt-get update && apt-get upgrade
+apt-get update
 apt-get install git screen lsb-release -y
 git clone https://github.com/d1gi/debian-deployer.git
 cd debian-deployer
@@ -15,7 +15,7 @@ cd debian-deployer
 or in one line command
 
 ```
-apt-get update && apt-get upgrade -y && apt-get install git screen lsb-release -y && git clone https://github.com/d1gi/debian-deployer.git && cd debian-deployer && ./install.sh
+apt-get update && apt-get install git screen lsb-release -y && git clone https://github.com/d1gi/debian-deployer.git && cd debian-deployer && ./install.sh
 ```
 
 Alternative via zip
