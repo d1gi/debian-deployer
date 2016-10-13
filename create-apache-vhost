@@ -62,4 +62,5 @@ file_put_contents("/var/www/{$domain}/web/.htaccess", $htaccess);
 file_put_contents("/var/www/{$domain}/web/robots.txt", $robotsTxt);
 system("chown -hR www-data:www-data /var/www/{$domain}/web");
 
-system('service apache2 reload');
+//system('service apache2 reload');
+system('/etc/init.d/apache2 reload');

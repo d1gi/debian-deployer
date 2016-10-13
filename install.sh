@@ -204,13 +204,13 @@ then
     apt-get install php-snmp php-xmlrpc php-xsl php7.0-mysql php-pgsql php-tidy php7.0-redis php-imap php-zip -y
     apt-get install php7.0-apcu php7.0-geoip php7.0-imagick php7.0-sqlite3 php7.0-ssh2 php7.0-memcached -y
 
-    ln -s /etc/php/7.0/global-php.ini /etc/php/7.0/apache2/conf.d/00-global-php.ini
-    ln -s /etc/php/7.0/global-php.ini /etc/php/7.0/cli/conf.d/00-global-php.ini
-    ln -s /etc/php/7.0/global-php.ini /etc/php/7.0/fpm/conf.d/00-global-php.ini
+    ln -s /etc/php/7.0/global.ini /etc/php/7.0/apache2/conf.d/00-global.ini
+    ln -s /etc/php/7.0/global.ini /etc/php/7.0/cli/conf.d/00-global.ini
+    ln -s /etc/php/7.0/global.ini /etc/php/7.0/fpm/conf.d/00-global.ini
 
-    ln -s /etc/php/7.0/php5-apache.ini /etc/php/7.0/apache2/conf.d/01-php-apache.ini
-    ln -s /etc/php/7.0/php5-cli.ini /etc/php/7.0/cli/conf.d/01-php-cli.ini
-    ln -s /etc/php/7.0/php5-fpm.ini /etc/php/7.0/fpm/conf.d/01-php-fpm.ini
+    ln -s /etc/php/7.0/php-apache.ini /etc/php/7.0/apache2/conf.d/01-php-apache.ini
+    ln -s /etc/php/7.0/php-cli.ini /etc/php/7.0/cli/conf.d/01-php-cli.ini
+    ln -s /etc/php/7.0/php-fpm.ini /etc/php/7.0/fpm/conf.d/01-php-fpm.ini
 
     a2enmod php7.0
     #a2enmod proxy_fcgi setenvif

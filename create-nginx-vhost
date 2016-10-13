@@ -94,4 +94,5 @@ file_put_contents("/var/www/{$domain}/web/app.php", $domain . ' is under constru
 file_put_contents("/var/www/{$domain}/web/robots.txt", $robotsTxt);
 system("chown -hR www-data:www-data /var/www/{$domain}/web");
 
-system('service nginx reload');
+//system('service nginx reload');
+system('/etc/init.d/nginx reload');
