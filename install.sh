@@ -201,7 +201,7 @@ elif (( $PHP_VERSION == 7 ))
 then
     # PHP 7.0
     apt-get install php php-cli php-dev php-fpm php-pear php-gd php-intl php-curl php-gmp php-mcrypt php-bz2 php-mbstring -y
-    apt-get install php-snmp php-xmlrpc php-xsl php7.0-mysql php-pgsql php-tidy php7.0-redis php-imap php-zip php-amqplib -y
+    apt-get install php-snmp php-xmlrpc php-xsl php7.0-mysql php-pgsql php-tidy php7.0-redis php-imap php-zip -y
     apt-get install php7.0-apcu php7.0-geoip php7.0-imagick php7.0-sqlite3 php7.0-ssh2 php7.0-memcached -y
 
     ln -s /etc/php/7.0/global.ini /etc/php/7.0/apache2/conf.d/00-global.ini
