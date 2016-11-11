@@ -1,0 +1,99 @@
+#!/usr/bin/env php
+<?php
+
+if (!isset($argv[1])) {
+    echo "You need to set domain name, for example: create-nginx-vhost mysite.ru\n";
+    exit(1);
+}
+
+$domain = $argv[1];
+
+if (file_exists('/var/www/' . $domain)) {
+    echo "Domain $domain is exists.\n";
+    exit(1);
+}
+
+$conf = '
+server {
+    server_name '.$domain.';
+    root /var/www/'.$domain.'/web;
+    error_log /var/log/nginx/'.$domain.'_errors.log;
+    access_log /var/log/nginx/'.$domain.'_access.log;
+
+    # Deny all . files
+    location ~ /\.(ht|git) {
+        deny all;
+    }
+
+    location / {
+        # try to serve file directly, fallback to app.php
+        try_files $uri /app.php$is_args$args;
+    }
+
+    location ~ ^/app\.php(/|$) {
+        #fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param HTTPS off;
+        # Prevents URIs that include the front controller. This will 404:
+        # http://domain.tld/app.php/some-path
+        # Remove the internal directive to allow URIs like this
+        internal;
+    }
+
+    # Accelerator cache cleaner
+    location ~ /apc(.+)\.php(/|$) {
+        #fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param HTTPS off;
+    }
+
+    # Statics
+    location ~ ^/bundles {
+        access_log off;
+        expires 30d;
+
+        # Font files
+        #if ($filename ~* ^.*?\.(eot)|(ttf)|(woff)$){
+        # add_header Access-Control-Allow-Origin *;
+        #}
+
+        try_files $uri @rewriteapp;
+    }
+    location ~ ^/_media {
+        access_log off;
+        expires 30d;
+        try_files $uri @rewriteapp;
+    }
+    location ~ ^/media {
+        access_log off;
+        expires 30d;
+        try_files $uri @rewriteapp;
+    }
+}
+';
+
+$robotsTxt = "
+# www.robotstxt.org/
+# www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
+
+User-Agent: *
+Disallow: /cgi-bin/
+Disallow: /admin/
+";
+
+file_put_contents('/etc/nginx/sites-enabled/'.$domain.'.conf', $conf);
+
+mkdir("/var/www/{$domain}");
+mkdir("/var/www/{$domain}/web");
+file_put_contents("/var/www/{$domain}/web/app.php", $domain . ' is under construction...');
+file_put_contents("/var/www/{$domain}/web/robots.txt", $robotsTxt);
+system("chown -hR www-data:www-data /var/www/{$domain}/web");
+
+//system('service nginx reload');
+system('/etc/init.d/nginx reload');
