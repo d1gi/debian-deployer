@@ -236,7 +236,7 @@ then
     cp -R "debian$DEBIAN_VERSION/etc" / -v
     cp -v create-apache-vhost /usr/local/bin/create-apache-vhost
     cp -v create-nginx-vhost /usr/local/bin/create-nginx-vhost
-    cp -v create-nginx-symfony-vhost /usr/local/bin/create-nginx-symfony-vhost
+    cp -v create-symfony-nginx-vhost /usr/local/bin/create-symfony-nginx-vhost
 fi
 
 # Cache
