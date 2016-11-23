@@ -112,8 +112,8 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
 printf "deb http://ppa.launchpad.net/webupd8team/java/ubuntu precise main\ndeb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main" > /etc/apt/sources.list.d/java.list
 
 # elasticsearch
-wget -qO - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
-echo "deb http://packages.elasticsearch.org/elasticsearch/1.7/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" > /etc/apt/sources.list.d/elasticsearch.list
 
 # Apache Cassandra
 apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 749D6EEC0353B12C
@@ -139,6 +139,7 @@ wget -qO- https://deb.nodesource.com/setup_6.x | bash -
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip dnsutils monit python-software-properties -y
 apt-get install acl bash-completion fail2ban resolvconf subversion sudo ntp imagemagick p7zip tree -y
 apt-get install libedit-dev libevent-dev libcurl4-openssl-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
+apt-get install libodbc1 libmyodbc odbc-postgresql -y
 apt-get install fcgiwrap libgd-tools snmp -y
 apt-get install oracle-java8-installer -y
 #apt-get install elasticsearch -y
