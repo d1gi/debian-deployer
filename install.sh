@@ -273,4 +273,8 @@ curl -L https://get.rvm.io | bash -s stable --ruby
 source /etc/profile.d/rvm.sh
 #source /usr/local/rvm/scripts/rvm
 #apt-get install ruby ruby-dev
-gem install capifony
+gem install capistrano
+gem install capistrano-composer
+gem install capistrano-maintenance
+gem install capistrano-symfony
+gem update
