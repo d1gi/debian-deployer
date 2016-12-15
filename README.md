@@ -79,8 +79,9 @@ Create virtual hosts
 --------------------
 
 ```
-create-apache-vhost mysite.ru
+create-symfony-nginx-vhost mysymfony-project.ru
 create-nginx-vhost mysite.ru
+create-apache-vhost mysite.ru
 ```
 
 Linux Add a Swap File – Howto
