@@ -21,6 +21,17 @@ case $PHP_VERSION in
        ;;
 esac
 
+read -p "Install Apache Web Server (N/y)" INSTALL_APACHE
+
+case $INSTALL_APACHE in
+    y|Y)echo -e "${GREEN} Enable Apache ${NORMAL}"
+        INSTALL_APACHE="1"
+        ;;
+    *)  echo -e "${YELLOW} Ignore Apache ${NORMAL}"
+        INSTALL_APACHE="0"
+        ;;
+esac
+
 read -p "Install PostrgeSQL (N/y)" INSTALL_POSTRGESQL
 
 case $INSTALL_POSTRGESQL in
@@ -158,32 +169,37 @@ fi
 #apt-get install mongodb-org php5-mongo -y
 #apt-get install mongodb php5-mongo -y
 #apt-get install mysql-server mysql-client -y
+apt-get install nodejs -y
 
-# Web server
+# Web servers
+if (( $INSTALL_APACHE == 1 ))
+then
+    apt-get install apache2 apache2-mpm-prefork libapache2-mod-rpaf  -y
 
-apt-get install apache2 apache2-mpm-prefork libapache2-mod-rpaf memcached mcrypt uw-mailutils -y
+    rm /etc/apache2/sites-enabled/000-default
+    rm /etc/apache2/sites-enabled/000-default.conf
+    a2enmod rewrite
+fi
+
+apt-get install nginx memcached mcrypt uw-mailutils -y
+chmod 0777 /var/log/nginx
 
 if (( $PHP_VERSION == 5 ))
 then
     # PHP 5.6
-    apt-get install libapache2-mod-php5 php5 php5-dev php5-cli php5-fpm -y
+    apt-get install php5 php5-dev php5-cli php5-fpm -y
     apt-get install php5-apcu php-pear php5-gd php5-intl php5-curl php5-geoip php5-gmp php5-imagick php5-mcrypt php5-sqlite php5-ssh2 -y
     apt-get install php5-snmp php5-xmlrpc php5-xsl php5-mysqlnd php5-pgsql php5-tidy php5-redis php5-memcache php5-memcached php5-imap -y
     apt-get install php-auth php-auth-sasl php-mail-mime php-mail-mimedecode -y
 
-    ln -s /etc/php5/global-php5.ini /etc/php5/apache2/conf.d/00-global-php5.ini
     ln -s /etc/php5/global-php5.ini /etc/php5/cli/conf.d/00-global-php5.ini
     ln -s /etc/php5/global-php5.ini /etc/php5/fpm/conf.d/00-global-php5.ini
 
-    ln -s /etc/php5/php5-apache.ini /etc/php5/apache2/conf.d/01-php5-apache.ini
     ln -s /etc/php5/php5-cli.ini /etc/php5/cli/conf.d/01-php5-cli.ini
     ln -s /etc/php5/php5-fpm.ini /etc/php5/fpm/conf.d/01-php5-fpm.ini
 
-    a2enmod php5
-
     # igbinary
     pecl install igbinary
-    ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/apache2/conf.d/20-igbinary.ini
     ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/cli/conf.d/20-igbinary.ini
     ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/fpm/conf.d/20-igbinary.ini
 
@@ -191,10 +207,19 @@ then
     git clone https://github.com/twigphp/Twig.git ~/Twig
     cd ~/Twig/ext/twig
     phpize;./configure;make;make install
-    ln -s /etc/php5/mods-available/twig.ini /etc/php5/apache2/conf.d/20-twig.ini
     ln -s /etc/php5/mods-available/twig.ini /etc/php5/cli/conf.d/20-twig.ini
     ln -s /etc/php5/mods-available/twig.ini /etc/php5/fpm/conf.d/20-twig.ini
     cd ~
+
+    if (( $INSTALL_APACHE == 1 ))
+    then
+        apt-get install libapache2-mod-php5  -y
+        ln -s /etc/php5/global-php5.ini /etc/php5/apache2/conf.d/00-global-php5.ini
+        ln -s /etc/php5/php5-apache.ini /etc/php5/apache2/conf.d/01-php5-apache.ini
+        ln -s /etc/php5/mods-available/igbinary.ini /etc/php5/apache2/conf.d/20-igbinary.ini
+        ln -s /etc/php5/mods-available/twig.ini /etc/php5/apache2/conf.d/20-twig.ini
+        a2enmod php5
+    fi
 
     service php5-fpm restart
 
@@ -220,12 +245,12 @@ then
     /etc/init.d/php7.0-fpm restart
 fi
 
-rm /etc/apache2/sites-enabled/000-default
-rm /etc/apache2/sites-enabled/000-default.conf
-a2enmod rewrite
+mkdir /var/lib/php
+mkdir /var/lib/php/sessions
+chmod 0777 /var/lib/php/sessions
 
-apt-get install nodejs nginx -y
-chmod 0777 /var/log/nginx
+mkdir /var/log/php
+chmod 0777 /var/log/php
 
 # Configs
 if [ ! -f ~/.bashrc_old ]
@@ -248,9 +273,6 @@ curl -skS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer.phar
 chmod 0755 /usr/local/bin/composer
 
-mkdir /var/log/php
-chmod 0777 /var/log/php
-
 wget http://get.sensiolabs.org/php-cs-fixer.phar -O /usr/local/bin/php-cs-fixer.phar
 chmod 0777 /usr/local/bin/php-cs-fixer.phar
 
@@ -262,9 +284,13 @@ git clone https://github.com/KnpLabs/symfony2-autocomplete.git /usr/share/symfon
 
 apt-get install postfix -y
 apt-get clean
-/etc/init.d/apache2 restart
 /etc/init.d/mysql restart
 /etc/init.d/nginx restart
+
+if (( $INSTALL_APACHE == 1 ))
+then
+    /etc/init.d/apache2 restart
+fi
 
 # Ruby
 # https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-an-debian-7-0-wheezy-vps-using-rvm
