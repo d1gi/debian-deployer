@@ -263,6 +263,8 @@ then
     cp -v create-apache-vhost /usr/local/bin/create-apache-vhost
     cp -v create-nginx-vhost /usr/local/bin/create-nginx-vhost
     cp -v create-symfony-nginx-vhost /usr/local/bin/create-symfony-nginx-vhost
+    chmod 0755 /usr/local/bin/create-nginx-vhost
+    chmod 0755 /usr/local/bin/create-symfony-nginx-vhost
 fi
 
 # Cache
