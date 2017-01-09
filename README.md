@@ -89,6 +89,47 @@ Linux Add a Swap File – Howto
 
 http://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/
 
+
+**Step #1: Create Storage File**
+
+Type the following command to create 512MB swap file (1024 * 512MB = 524288 block size):
+```
+dd if=/dev/zero of=/swapfile1 bs=1024 count=524288
+```
+
+**Step #2: Secure swap file**
+
+Setup correct file permission for security reasons, enter:
+```
+chown root:root /swapfile1
+chmod 0600 /swapfile1
+```
+
+**Step #3: Set up a Linux swap area**
+
+Type the following command to set up a Linux swap area in a file:
+```
+mkswap /swapfile1
+```
+
+**Step #4: Enabling the swap file**
+
+Finally, activate /swapfile1 swap space immediately, enter:
+```
+swapon /swapfile1
+```
+
+**Step #5: Update /etc/fstab file**
+
+To activate /swapfile1 after Linux system reboot, add entry to /etc/fstab file. Open this file using a text editor such as vi:
+```
+mcedit /etc/fstab
+```
+Append the following line:
+```
+/swapfile1 none swap sw 0 0
+```
+
 @todo
 -----
 
