@@ -8,16 +8,18 @@ DEBIAN_VERSION=$(cat /etc/debian_version | head -c 1)
 
 tput sgr0
 
-read -p "Select PHP version (5/7), default is 7:" PHP_VERSION
+read -p "Select PHP version (5/7/71), default is 71:" PHP_VERSION
 
 case $PHP_VERSION in
     5) echo -e "${GREEN} Enable PHP v5.6 ${NORMAL}"
        ;;
     7) echo -e "${GREEN} Enable PHP v7.0 ${NORMAL}"
        ;;
+    71) echo -e "${GREEN} Enable PHP v7.1 ${NORMAL}"
+       ;;
     *)
-       echo -e "${YELLOW} Wrong PHP version selected, using v 7.0 by default${NORMAL}"
-       PHP_VERSION="7"
+       echo -e "${YELLOW} Wrong PHP version selected, using v 7.1 by default${NORMAL}"
+       PHP_VERSION="71"
        ;;
 esac
 
@@ -51,6 +53,7 @@ dpkg-reconfigure tzdata
 
 apt-get upgrade -y
 
+# @todo http://blog.programster.org/debian-8-install-php-7-1/
 if (( $DEBIAN_VERSION == 7 ))
 then
     echo "Wheezy installing..."
@@ -80,13 +83,16 @@ elif (( $DEBIAN_VERSION == 8 ))
 then
     echo -e "${YELLOW} Jessie installing... ${NORMAL}"
 
-    # Dotdeb
+    # Ondrej Sury php 7.1
+    wget --quiet -O - https://packages.sury.org/php/apt.gpg | apt-key add -
+    printf "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php7.1.list
+
+    # Dotdeb 7.0
     wget --quiet -O - http://www.dotdeb.org/dotdeb.gpg | apt-key add -
     printf "deb http://packages.dotdeb.org jessie all\ndeb-src http://packages.dotdeb.org jessie all\ndeb http://mirror.nl.leaseweb.net/dotdeb/ jessie all\ndeb-src http://mirror.nl.leaseweb.net/dotdeb/ jessie all" > /etc/apt/sources.list.d/dotdeb.list
 
     # Nginx
     wget --quiet -O - http://nginx.org/keys/nginx_signing.key | apt-key add -
-    apt-key add nginx_signing.key
     printf "deb http://nginx.org/packages/mainline/debian/ jessie nginx\ndeb-src http://nginx.org/packages/mainline/debian/ jessie nginx" > /etc/apt/sources.list.d/nginx.list
 
     # Varnish
@@ -116,7 +122,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv 9ECBEC467F0CEB10
 apt-key adv --keyserver keyserver.ubuntu.com --recv D68FA50FEA312927
 apt-key adv --keyserver keyserver.ubuntu.com --recv EA312927
 #echo "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen" > /etc/apt/sources.list.d/mongodb.list
-echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.2 main" > /etc/apt/sources.list.d/mongodb.list
+echo "deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/3.4 main" > /etc/apt/sources.list.d/mongodb.list
 
 # Java
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
@@ -144,31 +150,32 @@ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB8
 
 # NodeJS
 #  in this step apt-get update will executes automatically
-wget -qO- https://deb.nodesource.com/setup_6.x | bash -
+wget -qO- https://deb.nodesource.com/setup_7.x | bash -
 
 # Базовый софт
 apt-get install colordiff mc make htop make git curl rcconf p7zip-full zip dnsutils monit python-software-properties -y
 apt-get install acl bash-completion fail2ban resolvconf subversion sudo ntp imagemagick p7zip tree -y
 apt-get install libedit-dev libevent-dev libcurl4-openssl-dev automake1.1 libncurses-dev libpcre3-dev pkg-config python-docutils -y
-apt-get install libodbc1 libmyodbc odbc-postgresql -y
-apt-get install fcgiwrap libgd-tools snmp -y
+apt-get install libodbc1 libmyodbc fcgiwrap libgd-tools snmp -y
 apt-get install oracle-java8-installer -y
 #apt-get install elasticsearch -y
 #apt-get install rabbitmq-server -y
 
 # БД
 apt-get install redis-server -y
+
+# @todo интерактивный выбор mysql
 apt-get install mariadb-server -y
+#apt-get install mysql-server mysql-client -y
 
 if (( $INSTALL_POSTRGESQL == 1 ))
 then
-    apt-get install postgresql postgresql-contrib -y
+    apt-get install postgresql postgresql-contrib odbc-postgresql -y
 fi
 
 #apt-get install cassandra -y
 #apt-get install mongodb-org php5-mongo -y
 #apt-get install mongodb php5-mongo -y
-#apt-get install mysql-server mysql-client -y
 apt-get install nodejs -y
 
 # Web servers
@@ -243,6 +250,28 @@ then
     #a2enconf php7.0-fpm
 
     /etc/init.d/php7.0-fpm restart
+fi
+
+elif (( $PHP_VERSION == 71 ))
+then
+    # PHP 7.1
+    apt-get install php php-cli php-dev php-fpm php-pear php-gd php-intl php-curl php-gmp php-mcrypt php-bz2 php-mbstring -y
+    apt-get install php-snmp php-xmlrpc php7.1-xsl php7.1-mysql php-pgsql php-tidy php7.1-redis php-imap php-zip php-bcmath -y
+    apt-get install php7.1-apcu php7.1-geoip php7.1-imagick php7.1-sqlite3 php7.1-ssh2 php7.1-memcached -y
+
+    ln -s /etc/php/7.1/global.ini /etc/php/7.1/apache2/conf.d/00-global.ini
+    ln -s /etc/php/7.1/global.ini /etc/php/7.1/cli/conf.d/00-global.ini
+    ln -s /etc/php/7.1/global.ini /etc/php/7.1/fpm/conf.d/00-global.ini
+
+    ln -s /etc/php/7.1/php-apache.ini /etc/php/7.1/apache2/conf.d/01-php-apache.ini
+    ln -s /etc/php/7.1/php-cli.ini /etc/php/7.1/cli/conf.d/01-php-cli.ini
+    ln -s /etc/php/7.1/php-fpm.ini /etc/php/7.1/fpm/conf.d/01-php-fpm.ini
+
+    a2enmod php7.1
+    #a2enmod proxy_fcgi setenvif
+    #a2enconf php7.0-fpm
+
+    /etc/init.d/php7.1-fpm restart
 fi
 
 mkdir /var/lib/php
