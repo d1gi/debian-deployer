@@ -252,7 +252,7 @@ then
     /etc/init.d/php7.0-fpm restart
 fi
 
-elif (( $PHP_VERSION == 71 ))
+if (( $PHP_VERSION == 71 ))
 then
     # PHP 7.1
     apt-get install php php-cli php-dev php-fpm php-pear php-gd php-intl php-curl php-gmp php-mcrypt php-bz2 php-mbstring -y
