@@ -171,6 +171,7 @@ apt-get install mariadb-server -y
 if (( $INSTALL_POSTRGESQL == 1 ))
 then
     apt-get install postgresql postgresql-contrib odbc-postgresql -y
+    update-rc.d postgresql defaults
 fi
 
 #apt-get install cassandra -y
@@ -250,6 +251,7 @@ then
     #a2enconf php7.0-fpm
 
     /etc/init.d/php7.0-fpm restart
+    update-rc.d php7.0-fpm defaults
 fi
 
 if (( $PHP_VERSION == 71 ))
@@ -272,6 +274,7 @@ then
     #a2enconf php7.0-fpm
 
     /etc/init.d/php7.1-fpm restart
+    update-rc.d php7.1-fpm defaults
 fi
 
 mkdir /var/lib/php
