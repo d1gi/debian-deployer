@@ -121,6 +121,7 @@ fi
 apt-key adv --keyserver keyserver.ubuntu.com --recv 9ECBEC467F0CEB10
 apt-key adv --keyserver keyserver.ubuntu.com --recv D68FA50FEA312927
 apt-key adv --keyserver keyserver.ubuntu.com --recv EA312927
+apt-key adv --keyserver keyserver.ubuntu.com --recv BC711F9BA15703C6
 #echo "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen" > /etc/apt/sources.list.d/mongodb.list
 echo "deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/3.4 main" > /etc/apt/sources.list.d/mongodb.list
 
@@ -324,7 +325,12 @@ apt-get clean
 if (( $INSTALL_APACHE == 1 ))
 then
     /etc/init.d/apache2 restart
+else
+    /etc/init.d/apache2 stop
+    apt-get purge apache* -y
 fi
+
+apt-get autoremove -y
 
 # Ruby
 # https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-an-debian-7-0-wheezy-vps-using-rvm
