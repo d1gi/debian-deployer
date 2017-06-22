@@ -3,22 +3,29 @@
 
 if (!isset($argv[1])) {
     echo "You need to set domain name, for example: create-nginx-vhost mysite.ru\n";
+    echo "Or with specific directory in /var/www/: create-nginx-vhost mysite.ru my_site_dir\n";
     exit(1);
 }
 
 $domain = $argv[1];
 
-if (file_exists('/var/www/' . $domain)) {
-    echo "Domain $domain is exists.\n";
+if (isset($argv[2]) and !empty($argv[2])) {
+    $dir = $argv[2];
+} else {
+    $dir = $domain;
+}
+
+if (file_exists('/var/www/' . $dir)) {
+    echo "Domain $domain in $dir is exists.\n";
     exit(1);
 }
 
 $conf = '
 server {
     server_name '.$domain.';
-    root /var/www/'.$domain.'/web;
-    error_log /var/log/nginx/'.$domain.'_errors.log;
-    access_log /var/log/nginx/'.$domain.'_access.log;
+    root /var/www/'.$dir.'/web;
+    error_log /var/log/nginx/'.$dir.'_errors.log;
+    access_log /var/log/nginx/'.$dir.'_access.log;
 
     # Deny dot files
     location ~ /\.(ht|git) {
@@ -46,12 +53,12 @@ Disallow: /cgi-bin/
 Disallow: /admin/
 ";
 
-file_put_contents('/etc/nginx/sites-enabled/'.$domain.'.conf', $conf);
+file_put_contents('/etc/nginx/sites-enabled/'.$dir.'.conf', $conf);
 
-mkdir("/var/www/{$domain}");
-mkdir("/var/www/{$domain}/web");
-file_put_contents("/var/www/{$domain}/web/index.php", $domain . ' is under construction...');
-file_put_contents("/var/www/{$domain}/web/robots.txt", $robotsTxt);
-system("chown -hR www-data:www-data /var/www/{$domain}/web");
+mkdir("/var/www/{$dir}");
+mkdir("/var/www/{$dir}/web");
+file_put_contents("/var/www/{$dir}/web/index.php", $domain . ' is under construction...');
+file_put_contents("/var/www/{$dir}/web/robots.txt", $robotsTxt);
+system("chown -hR www-data:www-data /var/www/{$dir}/web");
 
 system('/etc/init.d/nginx reload');
